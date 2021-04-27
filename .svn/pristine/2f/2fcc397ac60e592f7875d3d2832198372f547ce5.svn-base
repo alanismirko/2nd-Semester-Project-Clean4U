@@ -1,0 +1,5 @@
+package dbLayer;
+
+public interface PersonDBIF {
+	//TODO: finish methods
+}

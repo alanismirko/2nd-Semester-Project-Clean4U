@@ -1,0 +1,110 @@
+package databaselayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import controllerLayer.DataAccessException;
+import modelLayer.Address;
+import modelLayer.ZipCode;
+
+public class ZipCodeDB {
+	private final DBConnection dbcon;
+	
+	public ZipCodeDB() throws DataAccessException {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<ZipCode> getAllZipCodes() {
+		List<ZipCode> zipCodes = new ArrayList<>();
+		String query = "SELECT * FROM ZipCode";
+		
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while (res.next()) {
+				
+				zipCodes.add(new ZipCode(
+					res.getString("zipCode"),
+					res.getString("city")
+			));
+			
+				System.out.println("ZipCode received");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return zipCodes;
+	}
+	
+	public ZipCode getSpecificZipCode(String zcode) {
+		
+		String query = "SELECT * FROM ZipCode WHERE zipCode=" + zcode;
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while(res.next()) {
+				
+				
+				ZipCode zipCode = new ZipCode(
+						res.getString("zipCode"),
+						res.getString("city")
+				);
+				return zipCode;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int addZipCode(ZipCode zipCode) {
+		int res = 1;
+		
+		String query = "INSERT INTO ZipCode (zipCode, city)";
+		query += " VALUES (" + zipCode.getZipCode() + ","
+				+ zipCode.getCity();
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int deleteZipCode(ZipCode zipCode) {
+		int res = 1;
+		
+		String query = "DELETE FROM ZipCode WHERE zipCode=";
+		query += zipCode.getZipCode() + ";";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public int updateZipCode(ZipCode zipCode) {
+		int res = 1;
+		
+		String query = "UPDATE ZipCode (zipCode, city)";
+		query+= " SET ";
+		query += "zipCode = " + zipCode.getZipCode() + ",";
+		query += "country" + zipCode.getCity() + ",";
+		query += ");";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+}

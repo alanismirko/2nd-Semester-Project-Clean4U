@@ -1,0 +1,99 @@
+package controllerLayer;
+
+import java.util.List;
+import databaselayer.CustomerDB;
+import databaselayer.EmployeeDB;
+import databaselayer.ShiftDB;
+import modelLayer.Customer;
+import modelLayer.Employee;
+
+public class PersonController {
+private final CustomerDB cdb;
+private final EmployeeDB edb;
+private final ShiftDB shiftDB;
+	
+	public PersonController() throws DataAccessException {
+		cdb = new CustomerDB();
+		edb = new EmployeeDB();
+		shiftDB = new ShiftDB();
+	}
+	
+	/*
+	 * Person management
+	 */
+	//insert customer
+	public boolean insertCustomer (int id, String taxNum, String companyName, String firstName, String lastName, String phoneNumber, String email, String note)throws DataAccessException {
+		Customer customer = new Customer(id, taxNum, companyName, firstName, lastName, phoneNumber, email, note);
+		return cdb.addCustomer(customer) == 0;
+	}
+	//insert employee
+	public boolean insertEmployee(int id, String firstName, String lastName, String phoneNumber, String email, int managedBy, double salary, String specialization, String note) throws DataAccessException {
+		Employee employee = new Employee(id, firstName, lastName, phoneNumber, email, managedBy, salary, specialization, note);
+		return edb.addEmployee(employee) == 0;
+	}
+	
+	//update customer
+	public boolean updateCustomer(Customer customer) {
+		return (cdb.updateCustomer(customer) == 0) ? true : false; 
+	}
+	
+	//update employee
+	public boolean updateEmployee(Employee employee) { 
+		return (edb.updateEmployee(employee) == 0) ? true : false; 
+	}
+	
+	//find customer by ID
+	public Customer getCustomer(int id) {
+        return cdb.getCustomer(id);
+    }
+	
+	//get all customers
+	public List<Customer> getAllCustomers() {
+        return cdb.getAllCustomers();
+    }
+	
+	//find employee by ID
+	public Employee getEmployee(int id) {
+        return edb.getEmployee(id);
+    }
+	
+	//get all employees
+	public List<Employee> getAllEmployees() {
+        return edb.getAllEmployees();
+    }
+	
+	
+	//delete customer
+	public boolean deleteCustomer(Customer customer) { 
+		return (cdb.deleteCustomer(customer) == 0) ? true : false; 
+	}
+	
+	//delete employee
+	public boolean deleteEmployee(Employee employee) { 
+		return (edb.deleteEmployee(employee) == 0) ? true : false; 
+		}
+	
+	/*
+	 * Shift management
+	 */
+	/*
+	//insert shift
+	public Shift insertShift (Shift shift)throws DataAccessException {
+		shiftDB.insert(shift);
+		return shift;
+	}
+	//update shift
+	public void updateShift(int shiftId, int serviceId, int employeeId, Date date, Date startHour, Date endHour) throws DataAccessException{
+		shiftDB.update(shiftId);
+	}
+	//find shift
+	public Shift findShift (int shiftId) throws DataAccessException {
+		return shiftDB.find(shiftId);
+	}
+	//delete shift
+	public Shift deleteShift(Shift shift) throws DataAccessException {
+		shiftDB.delete(shift);
+		return shift;
+	}
+	*/
+}

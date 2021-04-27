@@ -1,0 +1,286 @@
+package gui;
+import controllerLayer.PersonController;
+import modelLayer.Employee;
+import java.awt.*;
+import javax.swing.*;
+
+import controllerLayer.DataAccessException;
+import modelLayer.Customer;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+class CreateNewEmployee extends JFrame{
+	
+	static JFrame emp;
+	static JPanel panel;
+	Home home;
+	Sites sites;
+	private static JTextField field_employeeID;
+	private static JTextField field_firstName;
+	private static JTextField field_lastName;
+	private static JTextField field_phone;
+	private static JTextField field_email;
+	private static JTextField field_manageBy;
+	private static JTextField field_salary;
+	private static JTextField field_specialization;
+	private static JTextField field_note;
+	private static PersonController personCtr;
+	
+	
+	public CreateNewEmployee() throws DataAccessException {
+		personCtr=new PersonController();
+		init();
+		
+	}
+
+	public static void init() {
+		emp = new JFrame();
+		emp.getContentPane().setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		emp.setResizable(false);
+		emp.getContentPane().setBackground(Color.WHITE);
+		emp.setVisible(true);
+		emp.setLocationRelativeTo(null);
+		emp.setTitle("Clean4U");
+		emp.setBounds(600,200, 700, 700);
+		emp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		emp.getContentPane().setLayout(null);
+		emp.setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/images/icon.jpg")));
+		
+		//logo
+	JLabel logo = new JLabel("");
+	logo.setBackground(new Color(176, 224, 230));
+	logo.setIcon(new ImageIcon(Customers.class.getResource("/images/logoclean.png")));
+	logo.setBounds(209, 13, 212, 184);
+	emp.getContentPane().add(logo);
+	
+	//help button
+	JButton btnNewButton = new JButton("HELP");
+	btnNewButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		}
+	});
+	btnNewButton.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			try {
+				Desktop.getDesktop().browse(new URI(
+						"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+			} catch (IOException | URISyntaxException e1) {
+				e1.printStackTrace();
+			}
+		}
+	});
+	btnNewButton.setBackground(new Color(135, 206, 250));
+	btnNewButton.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+	btnNewButton.setBounds(12, 13, 97, 25);
+	emp.getContentPane().add(btnNewButton);
+	
+	//menu
+	JButton btnEmployees = new JButton("EMPLOYEES");
+	btnEmployees.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Employees.init();
+			emp.dispose();
+		}
+	});
+	btnEmployees.setForeground(Color.WHITE);
+	btnEmployees.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+	btnEmployees.setBackground(new Color(30, 144, 255));
+	btnEmployees.setBounds(498, 210, 145, 42);
+	emp.getContentPane().add(btnEmployees);
+	
+	JButton btnNewButton_1_1 = new JButton("HOME");
+	btnNewButton_1_1.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Home.init();
+			emp.dispose();
+		}
+	});
+	btnNewButton_1_1.setForeground(Color.WHITE);
+	btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+	btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+	btnNewButton_1_1.setBounds(44, 210, 142, 42);
+	emp.getContentPane().add(btnNewButton_1_1);
+	
+	JButton btnClients = new JButton("CUSTOMERS");
+	btnClients.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Customers.init();
+			emp.dispose();
+		}
+	});
+			
+	btnClients.setForeground(Color.WHITE);
+	btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+	btnClients.setBackground(new Color(30, 144, 255));
+	btnClients.setBounds(185, 210, 157, 42);
+	emp.getContentPane().add(btnClients);
+	
+	JButton btnNewButton_1_2 = new JButton("SITES");
+	btnNewButton_1_2.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Sites.init();
+			emp.dispose();
+		}
+	});
+	btnNewButton_1_2.setForeground(Color.WHITE);
+	btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+	btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+	btnNewButton_1_2.setBounds(341, 210, 157, 42);
+	emp.getContentPane().add(btnNewButton_1_2);
+	
+	//Informations to be filled
+	JLabel lblNewLabel_1_6 = new JLabel("Specialization");
+	lblNewLabel_1_6.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_6.setBounds(156, 577, 125, 35);
+	emp.getContentPane().add(lblNewLabel_1_6);
+	
+	JLabel lblNewLabel_1_5 = new JLabel("Salary");
+	lblNewLabel_1_5.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_5.setBounds(156, 539, 112, 35);
+	emp.getContentPane().add(lblNewLabel_1_5);
+	
+	JLabel lblNewLabel_1_4 = new JLabel("ManagerID");
+	lblNewLabel_1_4.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_4.setBounds(156, 498, 112, 35);
+	emp.getContentPane().add(lblNewLabel_1_4);
+	
+	JLabel lblNewLabel_1_3 = new JLabel("Email");
+	lblNewLabel_1_3.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_3.setBounds(156, 457, 112, 35);
+	emp.getContentPane().add(lblNewLabel_1_3);
+	
+	JLabel lblNewLabel_1_2 = new JLabel("Phone ");
+	lblNewLabel_1_2.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_2.setBounds(156, 416, 112, 35);
+	emp.getContentPane().add(lblNewLabel_1_2);
+	
+	JLabel lblNewLabel_1_1 = new JLabel("Last name");
+	lblNewLabel_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_1.setBounds(156, 375, 112, 35);
+	emp.getContentPane().add(lblNewLabel_1_1);
+	
+	JLabel lblCvr = new JLabel("First name");
+	lblCvr.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblCvr.setBounds(156, 334, 112, 35);
+	emp.getContentPane().add(lblCvr);
+	
+	JLabel lblNewLabel = new JLabel("EmployeeID");
+	lblNewLabel.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel.setBounds(156, 293, 112, 35);
+	emp.getContentPane().add(lblNewLabel);
+	
+	field_employeeID = new JTextField();
+	field_employeeID.setColumns(10);
+	field_employeeID.setBounds(307, 296, 179, 28);
+	emp.getContentPane().add(field_employeeID);
+	
+	field_firstName = new JTextField();
+	field_firstName.setColumns(10);
+	field_firstName.setBounds(307, 337, 179, 28);
+	emp.getContentPane().add(field_firstName);
+	
+	field_lastName = new JTextField();
+	field_lastName.setColumns(10);
+	field_lastName.setBounds(307, 378, 179, 28);
+	emp.getContentPane().add(field_lastName);
+	
+	field_phone = new JTextField();
+	field_phone.setColumns(10);
+	field_phone.setBounds(307, 419, 179, 28);
+	emp.getContentPane().add(field_phone);
+	
+	field_email = new JTextField();
+	field_email.setColumns(10);
+	field_email.setBounds(307, 460, 179, 28);
+	emp.getContentPane().add(field_email);
+	
+	field_manageBy = new JTextField();
+	field_manageBy.setColumns(10);
+	field_manageBy.setBounds(307, 501, 179, 28);
+	emp.getContentPane().add(field_manageBy);
+	
+	field_salary = new JTextField();
+	field_salary.setColumns(10);
+	field_salary.setBounds(307, 542, 179, 28);
+	emp.getContentPane().add(field_salary);
+	
+	field_specialization = new JTextField();
+	field_specialization.setColumns(10);
+	field_specialization.setBounds(307, 583, 179, 28);
+	emp.getContentPane().add(field_specialization);
+	
+	JLabel lblNewLabel_1_6_1 = new JLabel("Note");
+	lblNewLabel_1_6_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+	lblNewLabel_1_6_1.setBounds(156, 617, 125, 35);
+	emp.getContentPane().add(lblNewLabel_1_6_1);
+	
+	field_note = new JTextField();
+	field_note.setColumns(10);
+	field_note.setBounds(307, 623, 179, 28);
+	emp.getContentPane().add(field_note);
+	
+	
+	//Back button
+	JButton btnBack = new JButton("Back");
+	btnBack.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			Employees.init();
+			emp.dispose();
+		}
+	});
+	btnBack.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+	btnBack.setBackground(new Color(135, 206, 250));
+	btnBack.setBounds(102, 265, 97, 25);
+	emp.getContentPane().add(btnBack);
+	
+	//Create button
+	JButton btnNewButton_1_4_1_1 = new JButton("CREATE");
+	btnNewButton_1_4_1_1.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			try {
+				PersonController perCon = new PersonController();
+				if(perCon.insertEmployee(
+						field_firstName.getText(),
+						field_lastName.getText(),
+						field_phone.getText(), 
+						field_email.getText(),
+						perCon.findEmployeeById(Integer.parseInt(field_manageBy.getText())),
+						Double.parseDouble(field_salary.getText()), 
+						field_specialization.getText(),
+						field_note.getText())!=null) {
+					JOptionPane.showMessageDialog(null, "Employee is created");
+				}else {
+					JOptionPane.showMessageDialog(null, "Employee is not created");
+				}
+			}catch (DataAccessException arg1){
+				arg1.printStackTrace();
+			}
+		}
+	});
+	btnNewButton_1_4_1_1.setForeground(Color.WHITE);
+	btnNewButton_1_4_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+	btnNewButton_1_4_1_1.setBackground(new Color(51, 51, 255));
+	btnNewButton_1_4_1_1.setBounds(513, 617, 145, 42);
+	emp.getContentPane().add(btnNewButton_1_4_1_1);
+	
+	
+	
+	JEditorPane editorPane = new JEditorPane();
+	editorPane.setEnabled(false);
+	editorPane.setEditable(false);
+	editorPane.setBackground(new Color(153, 204, 255));
+	editorPane.setBounds(102, 265, 413, 394);
+	emp.getContentPane().add(editorPane);
+	
+	
+	}
+}

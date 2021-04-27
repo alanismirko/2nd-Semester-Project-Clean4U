@@ -1,0 +1,138 @@
+package databaselayer;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelLayer.Employee;
+
+public class EmployeeDB {
+	private final DBConnection dbcon;
+	
+	public EmployeeDB() {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<Employee> getAllEmployees() {
+		List<Employee> employees = new ArrayList<>();
+		String query = "SELECT * FROM Employees";
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while (res.next()) {
+				employees.add(new Employee(
+					res.getInt("employeeId"),
+					res.getString("firstName"),
+					res.getString("lastName"),
+					res.getString("phoneNum"),
+					res.getString("email"),
+					res.getInt("managerId"),
+					res.getDouble("salary"),
+					res.getString("specialization"),
+					res.getString("note")
+			));
+			
+				System.out.println("Employee received");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return employees;
+	}
+	
+	public Employee getEmployee(int id) {
+
+		String query = "SELECT * FROM Employees WHERE employeeId =" + id;
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+
+			while (res.next()) {
+				Employee employee = new Employee(
+						res.getInt("employeeId"),
+						res.getString("firstName"),
+						res.getString("lastName"),
+						res.getString("phoneNum"),
+						res.getString("email"),
+						res.getInt("managerId"),
+						res.getDouble("salary"),
+						res.getString("specialization"),
+						res.getString("note")
+				);
+				return employee;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//here should lie the problem - it is possible to insert numbers, but you must fill all the fields or it won't work
+	//you cannot insert letters, it shows the message that the column does not exist (just try, you'll see what I mean)
+	//same is in CustomerDB, line 72
+	public int addEmployee(Employee employee) {
+		int res = 1;
+
+		String query = "INSERT INTO Employees (employeeId,firstName,lastName,phoneNum,email,managerId,salary,specialization,note)";
+		
+		query += " VALUES (" + employee.getId() + ","
+				+ employee.getFirstName() + ","
+				+ employee.getLastName() + ","
+				+ employee.getPhoneNumber() + ","
+				+ employee.getEmail() + ","
+				+ employee.getManagedBy() + ","
+				+ employee.getSalary() + ","
+				+ employee.getSpecialization() + ","
+				+ employee.getNote()+ ")";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int deleteEmployee(Employee employee) {
+		int res = 1;
+
+		String query = "DELETE FROM Employees WHERE employeeId = ";
+		query += employee.getId() + ";";
+
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
+	public int updateEmployee(Employee employee) {
+		int res = 1;
+
+		String query = "UPDATE Employees (employeeId,firstName,lastName,phoneNum,email,managerId,salary,specialization,note)";
+		query += " SET ";
+		query += "employeeId = " + employee.getId() + ",";
+		query += "firstName" + employee.getFirstName() + ",";
+		query += "lastName" + employee.getLastName() + ",";
+		query += "phoneNum" + employee.getPhoneNumber() + ",";
+		query += "email" + employee.getEmail() + ",";
+		query += "managerId" + employee.getManagedBy() + ",";
+		query += "salary" + employee.getSalary() + ",";
+		query += "specialization" + employee.getSpecialization() + ",";
+		query += "note" + employee.getNote() + ",";
+		query += ");";
+
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+}

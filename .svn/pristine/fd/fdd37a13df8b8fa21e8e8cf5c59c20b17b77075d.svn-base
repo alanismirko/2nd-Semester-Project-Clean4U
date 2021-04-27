@@ -1,0 +1,49 @@
+package modelLayer;
+
+public class Address {
+	private int addressId;
+	private String country;
+	private String zipCode;
+	private String street;
+	private String streetNumber;
+	
+	public Address(int addressId, String country, String zipCode, String street, String streetNumber) {
+		super();
+		this.addressId = addressId;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.street = street;
+		this.streetNumber = streetNumber;
+	}
+	public int getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+
+}

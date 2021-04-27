@@ -1,0 +1,261 @@
+package gui;
+import controllerLayer.DataAccessException;
+import controllerLayer.PersonController;
+import modelLayer.Customer;
+
+import java.awt.*;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
+
+class CompanyGui extends JFrame{
+	
+	 static JFrame company;
+	 JPanel panel;
+	private static   JTextField textField;
+	private final PersonController personCtr;
+	private Object customerTable;
+	private static CreateNewCompany createNewCompany;
+	private static JTable tblCustomers;
+	private static JTable table;
+	private static CompanyTable companyTable;
+	private static JTable table_1;
+
+	
+	public CompanyGui() throws DataAccessException {
+		this.personCtr = new PersonController();
+		this.companyTable = new CompanyTable();
+		this.tblCustomers.getSelectionModel();
+	
+		init();
+		
+	}
+
+	//listing of the customers
+	private Object tblCompanySelectionChanged() {
+		Customer customer = getCustomer();
+		return null;
+	}
+
+	private Customer getCustomer() {
+	int selectedRow = this.tblCustomers.getSelectedRow();
+	Customer customer = null;
+	if (selectedRow > -1) {
+		customer = this.companyTable.getCustomerOfRow(selectedRow);
+	}
+	return customer;	
+	}
+
+
+	public static void init() {
+		company = new JFrame();
+		company.setResizable(false);
+		company.getContentPane().setBackground(Color.WHITE);
+		company.setVisible(true);
+		company.setLocationRelativeTo(null);
+		company.setTitle("Clean4U");
+		company.setBounds(600,200, 700, 700);
+		company.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		company.getContentPane().setLayout(null);
+		company.setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/images/icon.jpg")));
+		
+		
+		//logo
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(CompanyGui.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		company.getContentPane().add(logo);
+		
+		//create new company button
+		JButton btnNewButton_1_4 = new JButton("CREATE NEW COMPANY");
+		btnNewButton_1_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateNewCompany.init();
+				company.dispose();
+			}
+		});
+		btnNewButton_1_4.setForeground(Color.WHITE);
+		btnNewButton_1_4.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4.setBounds(230, 552, 214, 42);
+		company.getContentPane().add(btnNewButton_1_4);
+		
+		//list all button
+		JButton btnNewButton_1_4_1 = new JButton("LIST ALL");
+		btnNewButton_1_4_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			
+				
+			}
+		});
+		btnNewButton_1_4_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1.setBounds(67, 601, 153, 42);
+		company.getContentPane().add(btnNewButton_1_4_1);
+		
+		textField = new JTextField();
+		textField.setToolTipText("");
+		textField.setText("Search");
+		textField.setColumns(10);
+		textField.setBounds(177, 273, 246, 34);
+		company.getContentPane().add(textField);
+		
+		//find button
+		JButton btnNewButton_1_5 = new JButton("FIND");
+		btnNewButton_1_5.setForeground(Color.WHITE);
+		btnNewButton_1_5.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_5.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_5.setBounds(421, 274, 82, 33);
+		company.getContentPane().add(btnNewButton_1_5);
+		
+		
+
+		
+		
+		//edit button
+		JButton btnNewButton_1_4_1_1 = new JButton("EDIT");
+		btnNewButton_1_4_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1.setBounds(259, 601, 145, 42);
+		company.getContentPane().add(btnNewButton_1_4_1_1);
+		
+		//delete button
+		JButton btnNewButton_1_4_1_1_1 = new JButton("DELETE");
+		btnNewButton_1_4_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_4_1_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1_1.setBounds(468, 601, 142, 42);
+		company.getContentPane().add(btnNewButton_1_4_1_1_1);
+		
+		//back button
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Customers.init();
+				company.dispose();
+			}
+		});
+		btnBack.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnBack.setBackground(new Color(135, 206, 250));
+		btnBack.setBounds(41, 266, 82, 24);
+		company.getContentPane().add(btnBack);
+		
+		//help button
+		JButton btnNewButton = new JButton("HELP");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBackground(new Color(135, 206, 250));
+		btnNewButton.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnNewButton.setBounds(12, 13, 97, 25);
+		
+		//menu buttons
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home.init();
+				company.dispose();
+			}
+		});
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(41, 201, 142, 42);
+		company.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnClients = new JButton("CUSTOMERS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Customers.init();
+				company.dispose();
+			}
+		});
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(182, 201, 157, 42);
+		company.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sites.init();
+				company.dispose();
+			}
+		});
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(338, 201, 157, 42);
+		company.getContentPane().add(btnNewButton_1_2);
+		
+		JButton btnEmployees = new JButton("EMPLOYEES");
+		btnEmployees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Employees.init();
+				company.dispose();
+			}
+		});
+		btnEmployees.setForeground(Color.WHITE);
+		btnEmployees.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnEmployees.setBackground(new Color(30, 144, 255));
+		btnEmployees.setBounds(495, 201, 145, 42);
+		company.getContentPane().add(btnEmployees);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(67, 320, 531, 219);
+		company.getContentPane().add(scrollPane);
+		
+		tblCustomers = new JTable();
+		scrollPane.setViewportView(tblCustomers);
+		tblCustomers.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Tax nr", "Name", "First name", "Last name", "Phone", "Email", "Note"
+			}
+		));
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEnabled(false);
+		editorPane.setEditable(false);
+		editorPane.setBackground(new Color(153, 204, 255));
+		editorPane.setBounds(41, 267, 599, 385);
+		company.getContentPane().add(editorPane);
+		
+		
+		
+		
+	
+	}
+}
+
+

@@ -1,0 +1,115 @@
+package databaselayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelLayer.Service;
+
+public class ServiceDB {
+	private final DBConnection dbcon;
+		
+	public ServiceDB() {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<Service> getAllSiteServices(int siteId) {
+		List<Service> services = new ArrayList<>();
+		String query = "SELECT * FROM Services WHERE siteId=" + siteId;
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while (res.next()) {
+				services.add(new Service(
+					res.getInt("serviceId"),
+					res.getInt("siteId"),
+					res.getString("type"),
+					res.getString("specifics")
+			));
+			
+				System.out.println("Service received");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return services;
+		
+	}
+	
+	public Service getSpecificService(int id) {
+		String query = "SELECT * FROM Services WHERE serviceId=" + id;
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while(res.next()) {
+				Service service = new Service(
+						res.getInt("serviceId"),
+						res.getInt("siteId"),
+						res.getString("type"),
+						res.getString("specifics")
+				);
+				return service;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int addService(Service service) {
+		int res = 1;
+
+		String query = "INSERT INTO Services (serviceId,siteId,type,specifics)";
+		query += " VALUES (" + service.getServiceId() + ","
+				+ service.getServiceId() + ","
+				+ service.getSiteId() + ","
+				+ service.getType() + ","
+				+ service.getSpecifics();
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int deleteService(Service service) {
+		int res = 1;
+		
+		String query = "DELETE FROM Services WHERE serviceId=";
+		query += service.getServiceId() + ";";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public int updateService(Service service) {
+		int res = 1;
+		
+		String query = "UPDATE Services (serviceId,siteId,type,specifics)";
+		query+= " SET ";
+		query += "serviceId = " + service.getServiceId() + ",";
+		query += "siteId" + service.getSiteId() + ",";
+		query += "type" + service.getType() + ",";
+		query += "specifics" + service.getSpecifics() + ",";
+		query += ");";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+}

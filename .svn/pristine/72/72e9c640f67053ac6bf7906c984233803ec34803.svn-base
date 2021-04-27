@@ -1,0 +1,99 @@
+package controllerLayer;
+
+import java.util.List;
+
+import databaselayer.ServiceDB;
+import databaselayer.ShiftDB;
+import databaselayer.SiteDB;
+import modelLayer.Address;
+import modelLayer.Customer;
+import modelLayer.Service;
+import modelLayer.Shift;
+import modelLayer.Site;
+import databaselayer.AddressDB;
+import databaselayer.CustomerDB;
+
+public class SiteController {
+	private SiteDB siteDB;
+	private ServiceDB serviceDB;
+	private ShiftDB shiftDB;
+	private CustomerDB cusDB;
+	private AddressDB adDB;
+	
+	public SiteController() {
+		siteDB = new SiteDB();
+		serviceDB = new ServiceDB();
+		shiftDB = new ShiftDB();
+	}
+	//we have to discuss if we gonna use find or get everywhere
+
+	public boolean insertSite (Customer customer, Address address, String typeOfSite, 
+			double sizeOfArea, String openHour, String closeHour)throws DataAccessException {
+		Site site = new Site(customer, address, typeOfSite, sizeOfArea, openHour, closeHour);
+		return siteDB.addSite(site) == 0;
+	}
+	//update site
+	public boolean updateSite(Site site) throws DataAccessException{
+		return (siteDB.updateSite(site) == 0) ? true : false;
+	}
+	//find site
+	public Site findSiteById (int siteId) throws DataAccessException {
+		return siteDB.getSpecificSite(siteId);
+	}
+	//get all sites of a customer
+	public List<Site> getAllCustomerSites(int customerId) {
+		return siteDB.getAllCustomerSites(customerId);
+	}
+	//delete site
+	public boolean deleteSite(Site site) throws DataAccessException {
+		return (siteDB.deleteSite(site) == 0) ? true : false;
+	}
+	
+	/*Service management*/
+	//insert service
+	public boolean insertService (int serviceId, int siteId, String type, String specifics)throws DataAccessException {
+		Service service = new Service(serviceId, siteId, type, specifics);
+		return serviceDB.addService(service) == 0;
+	}
+	//update service
+	public boolean updateService(Service service) throws DataAccessException{
+		return (serviceDB.updateService(service) == 0) ? true : false;
+	}
+	//find service
+	public Service findServiceById (int siteId) throws DataAccessException {
+		return serviceDB.getSpecificService(siteId);
+	}
+	//get all services done on a site
+	public List<Service> getAllSiteServices(int siteId) {
+		return serviceDB.getAllSiteServices(siteId);
+	}
+	//delete service
+	public boolean deleteService(Service service) throws DataAccessException{
+		return (serviceDB.deleteService(service) == 0) ? true : false;
+	}
+	
+	/*Shift management- shiftDB under construction*/
+	//insert shift
+	/**
+	public Shift insertShift (Shift shift)throws DataAccessException {
+		shiftDB.insert(shift);
+		return shift;
+	}
+	
+	
+	//update shift
+	public void updateShift(int shiftId, int serviceId, int employeeId, Date date, Date startHour, Date endHour) throws DataAccessException{
+		shiftDB.update(shiftId);
+	}
+	//find shift
+	public Shift findShift (int shiftId) throws DataAccessException {
+		return shiftDB.find(shiftId);
+	}
+	//delete shift
+	public Shift deleteShift(Shift shift) throws DataAccessException {
+		shiftDB.delete(shift);
+		return shift;
+	}
+	*/
+
+}

@@ -1,0 +1,61 @@
+package controllerLayer;
+
+import databaselayer.AddressDB;
+import modelLayer.Address;
+import modelLayer.ZipCode;
+
+public class AddressController {
+	
+	// |ADDRESSDB| WILL BE USED FOR BOTH ADDRESS AND ZIPCODE TABLES
+	
+	private AddressDB adb;
+
+	public AddressController() {
+		adb = new AddressDB();
+	}
+	
+	/*manage address - under construction*/
+	//insert address
+	/**
+	public Address insertService (Address address)throws DataAccessException {
+		adb.insert(address);
+		return address;
+	}
+	//update address
+	public void updateAddress(String zipCode, String city) throws DataAccessException{
+		adb.update(zipCode);
+	}
+	//find address
+	public Address findAddress (int addressId) throws DataAccessException {
+		return aadb.find(addressId);
+	}
+	//delete address
+	public Address deleteAddress(Address address) throws DataAccessException {
+		adb.delete(address);
+		return address;
+	}
+	*/
+	
+	/*manage zipCode - under construction*/
+	//insert zipCode
+	/**
+	public ZipCode insertZipCode (ZipCode zipCode)throws DataAccessException {
+		adb.insert(zipCode);
+		return zipCode;
+	}
+	//update zipCode
+	public void updateZipCode(String zipCode, String city) throws DataAccessException{
+		adb.update(zipCode);
+	}
+	//find address
+	public ZipCode findZipCode (String zipCode) throws DataAccessException {
+		return adb.find(zipCode);
+	}
+	//delete address
+	public ZipCode deleteZipCode(ZipCode zipCode) throws DataAccessException {
+		adb.delete(zipCode);
+		return zipCode;
+	}
+	*/
+	
+}

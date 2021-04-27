@@ -1,0 +1,27 @@
+package gui;
+
+import java.awt.Component;
+import modelLayer.Customer;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JLabel;
+import javax.swing.JList;
+
+public class CompanyListCellRenderer extends DefaultListCellRenderer {
+
+	
+	@Override
+	public Component getListCellRendererComponent(JList<?> list, Object value, 
+			int index, boolean isSelected, boolean cellHasFocus) {
+		//return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+		
+		Customer customer = (Customer) value;
+		String representation ="";
+		if (customer !=null) {
+			representation =String.format("%s %s %s", customer.getTaxNum(), customer.getCompanyName(),
+					customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), 
+					customer.getEmail(), customer.getNote());
+		}
+		return new JLabel (representation);
+	}
+}

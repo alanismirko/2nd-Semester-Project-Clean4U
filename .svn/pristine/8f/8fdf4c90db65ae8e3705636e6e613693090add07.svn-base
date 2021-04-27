@@ -1,0 +1,64 @@
+package controllerLayer;
+
+import java.util.Date;
+
+import databaselayer.ProductDB;
+import databaselayer.WarehouseDB;
+import modelLayer.OrderLine;
+import modelLayer.ProductDescription;
+import modelLayer.RequestedProducts;
+import modelLayer.Warehouse;
+
+public class ProductController {
+	private ProductDB pdb;
+	private WarehouseDB wdb;
+	
+	public ProductController() {
+		pdb = new ProductDB();
+	}
+	
+	/*product description management -currently under construction*/
+	//insert product description
+	/**
+	public ProductDescription insertproduct (ProductDescription product)throws DataAccessException {
+		pdb.insert(product);
+		return product;
+	}
+	//update product description
+	public void updateProduct(String barcode, String name, String category, double price) throws DataAccessException{
+		pdb.update(barcode);
+	}
+	//find product description
+	public ProductDescription findProduct (String barcode) throws DataAccessException {
+		return pdb.find(barcode);
+	}
+	//delete product description
+	public ProductDescription deleteProduct(ProductDescription product) throws DataAccessException {
+		pdb.delete(product);
+		return product;
+	}
+	*/
+	
+	/*manage warehouse - under construction*/
+	//insert warehouse
+	/**
+	public Warehouse insertWarehouse (Warehouse warehouse)throws DataAccessException {
+		wdb.insert(warehouse);
+		return warehouse;
+	}
+	//update warehouse
+	public void updateWarehouse(int warehouseId, int addressId, String name) throws DataAccessException{
+		wdb.update(warehouseId);
+	}
+	//find warehouse
+	public Warehouse findWarehouse (int warehouseId) throws DataAccessException {
+		return wdb.find(warehouseId);
+	}
+	//delete warehouse
+	public Warehouse deleteWarehouse(Warehouse warehouse) throws DataAccessException {
+		wdb.delete(warehouse);
+		return warehouse;
+	}
+	*/
+	
+}

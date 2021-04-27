@@ -1,0 +1,9 @@
+package databaselayer;
+
+public class ServiceDB {
+	private final DBConnection dbcon;
+		
+	public ServiceDB() {
+		dbcon = DBConnection.getInstance();
+	}
+}

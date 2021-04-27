@@ -1,0 +1,43 @@
+package modelLayer;
+
+public class Site {
+	private String address;
+	private String typeOfSite;
+	private double sizeOfArea;
+	private String workingHours;
+	private boolean status;
+	
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getTypeOfSite() {
+		return typeOfSite;
+	}
+	public void setTypeOfSite(String typeOfSite) {
+		this.typeOfSite = typeOfSite;
+	}
+	public double getSizeOfArea() {
+		return sizeOfArea;
+	}
+	public void setSizeOfArea(int sizeOfArea) {
+		this.sizeOfArea = sizeOfArea;
+	}
+	public String getWorkingHours() {
+		return workingHours;
+	}
+	public void setWorkingHours(String workingHours) {
+		this.workingHours = workingHours;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
+	
+}

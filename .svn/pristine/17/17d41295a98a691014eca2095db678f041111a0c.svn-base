@@ -1,0 +1,10 @@
+package guiLayer;
+
+import javax.swing.JFrame;
+
+public class Home extends JFrame{
+	public Home() {
+		init();
+	}
+	
+}

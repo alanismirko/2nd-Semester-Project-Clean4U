@@ -1,0 +1,237 @@
+package gui;
+import java.awt.*;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.event.ActionEvent;
+
+class CreateNewSite extends JFrame{
+	
+	static JFrame createS;
+	static JPanel panel;
+	private static JTextField field_size;
+	private static JTextField field_type;
+	private static JTextField field_addressID;
+	private static JTextField field_siteID;
+	private static JTextField field_customerID;
+	private static JTextField field_open;
+	private static JTextField field_close;
+	
+	public CreateNewSite() {
+		init();
+	}
+
+	public static void init() {
+		createS = new JFrame();
+		createS.setResizable(false);
+		createS.getContentPane().setBackground(Color.WHITE);
+		createS.setVisible(true);
+		createS.setLocationRelativeTo(null);
+		createS.setTitle("Clean4U");
+		createS.setBounds(600,200, 700, 700);
+		createS.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		createS.getContentPane().setLayout(null);
+		createS.setIconImage(Toolkit.getDefaultToolkit().getImage(CreateNewSite.class.getResource("/images/icon.jpg")));
+
+		//logo
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(CreateNewCompany.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		createS.getContentPane().add(logo);
+		
+		//information to be filled
+		JLabel lblNewLabel = new JLabel("SiteID");
+		lblNewLabel.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel.setBounds(180, 286, 112, 35);
+		createS.getContentPane().add(lblNewLabel);
+		
+		JLabel lblCvr = new JLabel("CustomerID");
+		lblCvr.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblCvr.setBounds(180, 327, 112, 35);
+		createS.getContentPane().add(lblCvr);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("AddressID");
+		lblNewLabel_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_1.setBounds(180, 368, 112, 35);
+		createS.getContentPane().add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Type");
+		lblNewLabel_1_2.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_2.setBounds(180, 409, 127, 35);
+		createS.getContentPane().add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Size of area");
+		lblNewLabel_1_3.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_3.setBounds(180, 450, 112, 35);
+		createS.getContentPane().add(lblNewLabel_1_3);
+		
+		field_size = new JTextField();
+		field_size.setColumns(10);
+		field_size.setBounds(331, 453, 179, 28);
+		createS.getContentPane().add(field_size);
+		
+		field_type = new JTextField();
+		field_type.setColumns(10);
+		field_type.setBounds(331, 412, 179, 28);
+		createS.getContentPane().add(field_type);
+		
+		field_addressID = new JTextField();
+		field_addressID.setColumns(10);
+		field_addressID.setBounds(331, 371, 179, 28);
+		createS.getContentPane().add(field_addressID);
+		
+		field_siteID = new JTextField();
+		field_siteID.setColumns(10);
+		field_siteID.setBounds(331, 289, 179, 28);
+		createS.getContentPane().add(field_siteID);
+		
+		//create button
+		JButton btnNewButton_1_4_1_1 = new JButton("CREATE");
+		btnNewButton_1_4_1_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		});
+		btnNewButton_1_4_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1.setBounds(537, 610, 145, 42);
+		createS.getContentPane().add(btnNewButton_1_4_1_1);
+		
+		//help button
+		JButton btnNewButton = new JButton("HELP");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBackground(new Color(135, 206, 250));
+		btnNewButton.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnNewButton.setBounds(12, 13, 97, 25);
+		createS.getContentPane().add(btnNewButton);
+		
+		//back button
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SitesS.init();
+				createS.dispose();
+			}
+		});
+		btnBack.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnBack.setBackground(new Color(135, 206, 250));
+		btnBack.setBounds(126, 258, 97, 25);
+		createS.getContentPane().add(btnBack);
+		
+		
+		//menu buttons
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home.init();
+				createS.dispose();
+			}
+		});
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(41, 203, 142, 42);
+		createS.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnClients = new JButton("CUSTOMERS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Customers.init();
+				createS.dispose();
+			}
+		});
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(182, 203, 157, 42);
+		createS.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sites.init();
+				createS.dispose();
+			}
+		});
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(338, 203, 157, 42);
+		createS.getContentPane().add(btnNewButton_1_2);
+		
+		JButton btnEmployees = new JButton("EMPLOYEES");
+		btnEmployees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Employees.init();
+				createS.dispose();
+			}
+		});
+		btnEmployees.setForeground(Color.WHITE);
+		btnEmployees.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnEmployees.setBackground(new Color(30, 144, 255));
+		btnEmployees.setBounds(495, 203, 145, 42);
+		createS.getContentPane().add(btnEmployees);
+		
+		field_customerID = new JTextField();
+		field_customerID.setColumns(10);
+		field_customerID.setBounds(331, 327, 179, 28);
+		createS.getContentPane().add(field_customerID);
+		
+		JLabel lblNewLabel_1_3_1 = new JLabel("Open hour");
+		lblNewLabel_1_3_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_3_1.setBounds(180, 491, 112, 35);
+		createS.getContentPane().add(lblNewLabel_1_3_1);
+		
+		field_open = new JTextField();
+		field_open.setColumns(10);
+		field_open.setBounds(331, 494, 179, 28);
+		createS.getContentPane().add(field_open);
+		
+		JLabel lblNewLabel_1_3_1_1 = new JLabel("Close hour");
+		lblNewLabel_1_3_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_3_1_1.setBounds(180, 532, 112, 35);
+		createS.getContentPane().add(lblNewLabel_1_3_1_1);
+		
+		field_close = new JTextField();
+		field_close.setColumns(10);
+		field_close.setBounds(331, 535, 179, 28);
+		createS.getContentPane().add(field_close);
+		
+		JLabel lblNewLabel_1_3_1_2 = new JLabel("Status");
+		lblNewLabel_1_3_1_2.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_3_1_2.setBounds(180, 574, 112, 35);
+		createS.getContentPane().add(lblNewLabel_1_3_1_2);
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEnabled(false);
+		editorPane.setEditable(false);
+		editorPane.setBackground(new Color(153, 204, 255));
+		editorPane.setBounds(126, 258, 413, 394);
+		createS.getContentPane().add(editorPane);
+	}
+}
+
+

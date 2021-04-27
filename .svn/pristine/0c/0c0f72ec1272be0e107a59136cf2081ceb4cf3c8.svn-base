@@ -1,0 +1,118 @@
+package databaselayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import controllerLayer.DataAccessException;
+import modelLayer.ProductDescription;
+
+
+public class ProductDB {
+	private final DBConnection dbcon;
+	
+	public ProductDB() throws DataAccessException {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<ProductDescription> getAllProducts() {
+        List<ProductDescription> products = new ArrayList<>();
+
+        String query = "SELECT * FROM ProductDescription";
+
+        try {
+            ResultSet res = dbcon.executeQuery(query);
+
+            while (res.next()) {
+                products.add(new ProductDescription(
+                        res.getInt("barcode"),
+                        res.getString("name"),
+                        res.getString("category"),
+                        res.getDouble("price")
+                ));
+
+                System.out.println("ProductDescriptor received");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return products;
+    }
+
+	public ProductDescription getSpecificProduct(int id) {
+        ProductDescription product = new ProductDescription();
+
+        String query = "SELECT * FROM ProductDescription WHERE barcode=" + id;
+
+        try {
+            ResultSet res = dbcon.executeQuery(query);
+
+            while (res.next()) {
+                product = new ProductDescription(
+                		res.getInt("barcode"),
+                        res.getString("name"),
+                        res.getString("category"),
+                        res.getDouble("price")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return product;
+    }
+	
+	public int addProduct(ProductDescription product) {
+        int res = -1;
+
+        String query = "INSERT INTO ProductDescription (barcode, name, category, price)";
+        query += " VALUES (" + product.getName() + ","
+                + product.getBarcode() + ","
+                + product.getName() + ","
+                + product.getCategory() + ","
+                + product.getPrice();
+        try {
+            res = dbcon.executeInsertWithIdentity(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+	
+	public int deleteProduct(ProductDescription product) {
+		int res = 1;
+		
+		String query = "DELETE FROM ProductDescription WHERE barcode=";
+		query += product.getBarcode() + ";";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public int updateProduct(ProductDescription product) {
+		int res = 1;
+		
+		String query = "UPDATE ProductDescription (barcode, name, category, price)";
+		query+= " SET ";
+		query += "barcode = " + product.getBarcode() + ",";
+		query += "name" + product.getName() + ",";
+		query += "category" + product.getCategory() + ",";
+		query += "price" + product.getPrice() + ",";
+		query += ");";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+}

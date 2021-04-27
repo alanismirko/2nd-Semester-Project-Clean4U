@@ -1,0 +1,30 @@
+package databaselayer;
+
+import java.util.List;
+
+import modelLayer.Site;
+
+
+public class SiteDB {
+	private final DBConnection dbcon;
+	
+	public SiteDB() {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<Site> getAllCustomerSites(){
+		
+	}
+	
+	public Site getSpecificSite(int id) {
+		
+	}
+	
+	public boolean addSite() {
+		
+	}
+	
+	
+}
+
+

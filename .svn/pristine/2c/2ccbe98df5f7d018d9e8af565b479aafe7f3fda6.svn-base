@@ -1,0 +1,9 @@
+package databaselayer;
+
+import controllerLayer.DataAccessException;
+import modelLayer.Address;
+
+public interface AddressDBIF {
+	Address findAddressById(int addressId) throws DataAccessException;
+
+}

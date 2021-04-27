@@ -1,0 +1,82 @@
+package modelLayer;
+
+public class Site {
+	private int siteId;
+	private int customerId;
+	private int addressId;
+	private String typeOfSite;
+	private double sizeOfArea;
+	private String openHour;
+	private String closeHour;
+	private boolean status;
+	
+	
+	public Site(int siteId, int customerId, int addressId, String typeOfSite, 
+			double sizeOfArea, String openHour, String closeHour, boolean status) {
+		this.siteId = siteId;
+		this.customerId = customerId;
+		this.addressId = addressId;
+		this.typeOfSite = typeOfSite;
+		this.sizeOfArea = sizeOfArea;
+		this.openHour = openHour;
+		this.setCloseHour(closeHour);
+		this.status = status;
+	}
+	public int getAddress() {
+		return addressId;
+	}
+	public void setAddress(int address) {
+		this.addressId = address;
+	}
+	public String getTypeOfSite() {
+		return typeOfSite;
+	}
+	public void setTypeOfSite(String typeOfSite) {
+		this.typeOfSite = typeOfSite;
+	}
+	public double getSizeOfArea() {
+		return sizeOfArea;
+	}
+	public void setSizeOfArea(int sizeOfArea) {
+		this.sizeOfArea = sizeOfArea;
+	}
+	public String getOpenHour() {
+		return openHour;
+	}
+	public void setOpenHour(String openHour) {
+		this.openHour = openHour;
+	}
+	public String getCloseHour() {
+		return closeHour;
+	}
+	public void setCloseHour(String closeHour) {
+		this.closeHour = closeHour;
+	}
+	public boolean getStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public int getSiteId() {
+		return siteId;
+	}
+	public void setSiteId(int siteId) {
+		this.siteId = siteId;
+	}
+	public int getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+	public int getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+
+	
+	
+}

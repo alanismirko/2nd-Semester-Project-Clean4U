@@ -1,0 +1,21 @@
+package guiLayer;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class PanelEmployee extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public PanelEmployee() {
+		setVisible(true);
+		setBounds(0, 0, 919, 401);
+		setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("hihi");
+		lblNewLabel.setBounds(335, 134, 206, 103);
+		add(lblNewLabel);
+	}
+
+}

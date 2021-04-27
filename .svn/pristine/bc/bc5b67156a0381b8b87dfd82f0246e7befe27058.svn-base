@@ -1,0 +1,65 @@
+package databaselayer;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import controllerLayer.DataAccessException;
+import modelLayer.Address;
+import modelLayer.Customer;
+import modelLayer.Site;
+import modelLayer.ZipCode;
+
+public class AddressDB implements AddressDBIF{
+		
+		private static final String FIND_ALL_Q = "SELECT * FROM addresses";
+		private PreparedStatement findAllPS;
+	
+		private final String FIND_BY_ID_Q = FIND_ALL_Q + " WHERE addressId = ?";
+		private PreparedStatement findByIdPS;
+	
+	public AddressDB() throws DataAccessException{
+		init();
+	}
+	
+	public void init() throws DataAccessException{
+		Connection con = DBConnection.getInstance().getConnection();
+		try {
+			findByIdPS = con.prepareStatement(FIND_BY_ID_Q);
+		}catch (SQLException e){
+			throw new DataAccessException ("Could not preapare statemnt", e);
+		}
+	}
+	
+	@Override
+	public Address findAddressById(int addressId) throws DataAccessException{
+		Address res = null;
+		try {
+			findByIdPS.setInt(1, addressId);
+			ResultSet rs = findByIdPS.executeQuery();
+			if(rs.next()) {
+				res = buildObject(rs);
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not bind or execute query", e);
+		}
+		return res;
+	}
+	
+	private Address buildObject (ResultSet rs) throws DataAccessException{
+		Address currAddress = new Address();
+		try {
+			currAddress.setAddressId(rs.getInt("addressId"));
+			currAddress.setCountry(rs.getString("country"));
+			currAddress.setZipCode(rs.getString("zipCode"));
+			currAddress.setStreet(rs.getString("street"));
+			currAddress.setStreetNumber(rs.getInt("streetNum"));
+		} catch (SQLException e) {
+			throw new DataAccessException("Could not read resultset", e);
+		}
+		return currAddress;
+	}
+}

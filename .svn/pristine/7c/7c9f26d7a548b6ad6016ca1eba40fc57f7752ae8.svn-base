@@ -1,0 +1,97 @@
+package controllerLayer;
+
+import java.util.List;
+
+
+import databaselayer.SiteDB;
+import databaselayer.SiteDBIF;
+import databaselayer.ServiceDB;
+import databaselayer.ServiceDBIF;
+import modelLayer.Address;
+import modelLayer.Customer;
+import modelLayer.Service;
+import modelLayer.Site;
+
+public class SiteController {
+	private SiteDBIF siteDB;
+	private ServiceDBIF serviceDB;
+	
+	public SiteController() throws DataAccessException {
+		siteDB = new SiteDB();
+		serviceDB = new ServiceDB();
+	}
+	
+	//SITE
+	
+	//insert site
+	public Site insertSite (Customer customer, Address address, String typeOfSite, 
+			double sizeOfArea, String openHour, String closeHour)throws DataAccessException {
+		Site site = new Site(customer, address, typeOfSite, sizeOfArea, openHour, closeHour);
+		siteDB.insert(site);
+		return site;
+	}
+	//update site
+	public boolean updateSite(Site site) throws DataAccessException{
+		return (siteDB.update(site));
+	}
+	//get all sites of a customer
+	public List<Site> getAllCustomerSites(Customer customer) throws DataAccessException {
+		return siteDB.findAllCustomerSites(customer,true);
+	}
+	//delete site
+	public boolean deleteSite(Site site) throws DataAccessException {
+		return siteDB.delete(site);
+	}
+	
+	//SERVICE
+	
+	//insert service
+	public boolean insertService (int serviceId, Site site , String type, String specifics)throws DataAccessException {
+		Service service = new Service(serviceId, site, type, specifics);
+		serviceDB.insert(service);
+		return service != null;
+	}
+	//update service
+	public boolean updateService(Service service) throws DataAccessException{
+		return (serviceDB.update(service));
+	}
+	
+	/**
+	//find service
+	public Service findServiceById (int siteId) throws DataAccessException {
+		return serviceDB.getSpecificService(siteId);
+	}
+	*/
+	
+	//get all services done on a site
+	public List<Service> getAllSiteServices(Site site) throws DataAccessException {
+		return serviceDB.findAllSiteServices(site, true);
+	}
+	
+	//delete service
+	public boolean deleteService(Service service) throws DataAccessException{
+		return serviceDB.delete(service);
+	}
+	
+	
+	/**
+	//insert shift
+	public Shift insertShift (Shift shift)throws DataAccessException {
+		shiftDB.insert(shift);
+		return shift;
+	}
+	//update shift
+	public void updateShift(int shiftId, int serviceId, int employeeId, Date date, Date startHour, Date endHour) throws DataAccessException{
+		shiftDB.update(shiftId);
+	}
+	//find shift
+	public Shift findShift (int shiftId) throws DataAccessException {
+		return shiftDB.find(shiftId);
+	}
+	//delete shift
+	public Shift deleteShift(Shift shift) throws DataAccessException {
+		shiftDB.delete(shift);
+		return shift;
+	}
+	**/
+}

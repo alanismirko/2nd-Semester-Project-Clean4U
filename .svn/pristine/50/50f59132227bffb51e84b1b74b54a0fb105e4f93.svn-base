@@ -1,0 +1,21 @@
+package databaselayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import controllerLayer.DataAccessException;
+import modelLayer.Address;
+import modelLayer.Customer;
+import modelLayer.Site;
+import modelLayer.ZipCode;
+
+public class AddressDB {
+
+	public Address findAddressById(int addressId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

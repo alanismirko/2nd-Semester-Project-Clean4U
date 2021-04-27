@@ -1,0 +1,24 @@
+package guiLayer;
+
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class PanelCompany extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public PanelCompany() {
+		setBounds(0, 0, 919, 401);
+		setLayout(null);
+		
+		
+		JLabel lblNewLabel = new JLabel("hehe");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setBounds(335, 134, 206, 103);
+		add(lblNewLabel);
+	}
+
+}

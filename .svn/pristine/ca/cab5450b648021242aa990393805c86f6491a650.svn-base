@@ -1,0 +1,132 @@
+package databaselayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelLayer.Customer;
+
+public class CustomerDB {
+	private final DBConnection dbcon;
+	
+	public CustomerDB() {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<Customer> getAllCustomers() {
+		List<Customer> customers = new ArrayList<>();
+
+		String query = "SELECT * FROM Customers";
+
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+
+			while (res.next()) {
+				customers.add(new Customer(
+						res.getInt("customerId"),
+						res.getString("taxNum"),
+						res.getString("companyName"),
+						res.getString("firstName"),
+						res.getString("lastName"),
+						res.getString("phoneNum"),
+						res.getString("email"),
+						res.getString("note")
+				));
+
+				System.out.println("Customer received");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customers;
+	}
+	
+	//check this one later
+	public Customer getCustomer(int id) {
+
+		String query = "SELECT * FROM Customers WHERE customerId =" + id;
+		
+		try {
+			ResultSet res = dbcon.executeQuery(query);
+
+			while (res.next()) {
+				Customer customer = new Customer(
+						res.getInt("customerId"),
+						res.getString("taxNum"),
+						res.getString("companyName"),
+						res.getString("firstName"),
+						res.getString("lastName"),
+						res.getString("phoneNum"),
+						res.getString("email"),
+						res.getString("note")
+				);
+				return customer;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public int addCustomer(Customer customer) {
+		int res = 1;
+
+		String query = "INSERT INTO Customers (customerId,taxNum,companyName,firstName,lastName,phoneNum,email,note)";
+		query += " VALUES (" + customer.getId() + ","
+				+ customer.getTaxNum() + ","
+				+ customer.getCompanyName() + ","
+				+ customer.getFirstName() + ","
+				+ customer.getLastName() + ","
+				+ customer.getPhoneNumber() + ","
+				+ customer.getEmail() + ","
+				+ customer.getNote();
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int deleteCustomer(Customer customer) {
+		int res = 1;
+
+		String query = "DELETE FROM Customers WHERE customerId = ";
+		query += customer.getId() + ";";
+
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
+	public int updateCustomer(Customer customer) {
+		int res = 1;
+
+		String query = "UPDATE Customers (customerId,taxNum,companyName,firstName,lastName,phoneNum,email,note)";
+		query += " SET ";
+		query += "customerId = " + customer.getId() + ",";
+		query += "taxNum" + customer.getTaxNum() + ",";
+		query += "companyName" + customer.getCompanyName() + ",";
+		query += "firstName" + customer.getFirstName() + ",";
+		query += "lastName" + customer.getLastName() + ",";
+		query += "phoneNum" + customer.getPhoneNumber() + ",";
+		query += "email" + customer.getEmail() + ",";
+		query += "note" + customer.getNote() + ",";
+		query += ");";
+
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+}

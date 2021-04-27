@@ -1,0 +1,40 @@
+package controllerLayer;
+import java.util.ArrayList;
+
+import dbLayer.SitesDB;
+import dbLayer.SitesDBIF;
+import modelLayer.Site;
+
+public class SitesController {
+	private SitesDBIF sitesDB;
+	
+	public SitesController() throws DataAccessExcception {
+		sitesDB = new SitesDB();
+	}
+	
+	//adding site to the database
+	public Site insertSite(Site s) throws DataAccessException {
+		sitesDB.insertSite(s);
+		return s;
+	}
+	
+	//updating site
+	public void updateSite() {
+		
+	}
+	
+	//deleting site from database
+	public Site deleteSite(Site s) {
+		return s;
+	}
+	
+	//find site by ID
+	public Site findSiteByID(int siteID) {
+		return null;
+	}
+	
+	//list all sites from DB
+	public ArrayList<Site> listAllSites() {
+		return null;
+	}
+}

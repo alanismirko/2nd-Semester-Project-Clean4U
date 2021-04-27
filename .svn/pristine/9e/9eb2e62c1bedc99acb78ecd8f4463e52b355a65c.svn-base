@@ -1,0 +1,36 @@
+package modelLayer;
+
+public class Employee  extends Person{
+	private int managedBy;
+	private double salary;
+	private String specialization;
+	
+	public Employee(int id, String firstName, String lastName, String phoneNumber, String email, int managedBy, double salary, String specialization, String note) {
+		super(id,firstName,lastName,phoneNumber,email,note);
+		this.managedBy = managedBy;
+		this.salary = salary;
+		this.specialization = specialization;
+	}
+	
+	public int getManagedBy() {
+		return managedBy;
+	}
+
+	public void setManagedBy(int managedBy) {
+		this.managedBy = managedBy;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public String getSpecialization() {
+		return specialization;
+	}
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
+	
+	
+}

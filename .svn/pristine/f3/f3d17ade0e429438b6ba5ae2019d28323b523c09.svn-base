@@ -1,0 +1,9 @@
+package databaselayer;
+
+public class ShiftDB {
+	private final DBConnection dbcon;
+	
+	public ShiftDB() {
+		dbcon = DBConnection.getInstance();
+	}
+}

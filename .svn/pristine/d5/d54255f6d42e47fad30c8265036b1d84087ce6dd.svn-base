@@ -1,0 +1,224 @@
+package gui;
+import java.awt.*;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.event.ActionEvent;
+
+class CreatePrivateClient extends JFrame{
+	
+	private JFrame createP;
+	private JPanel panel;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private PrivateGui privateGui;
+	private Home home;
+	private Sites sites;
+	private Employees employees;
+	
+	public CreatePrivateClient() {
+		init();
+	}
+
+	public void init() {
+		createP = new JFrame();
+		createP.setResizable(false);
+		createP.getContentPane().setBackground(Color.WHITE);
+		createP.setVisible(true);
+		createP.setLocationRelativeTo(null);
+		createP.setTitle("Clean4U");
+		createP.setBounds(600,200, 700, 700);
+		createP.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		createP.getContentPane().setLayout(null);
+		createP.setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/images/icon.jpg")));
+
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(CreatePrivateClient.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		createP.getContentPane().add(logo);
+		
+		JLabel lblNewLabel = new JLabel("Client ID");
+		lblNewLabel.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel.setBounds(180, 286, 112, 35);
+		createP.getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(331, 532, 179, 73);
+		createP.getContentPane().add(textField);
+		
+		JLabel lblCvr = new JLabel("Tax number");
+		lblCvr.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblCvr.setBounds(180, 327, 112, 35);
+		createP.getContentPane().add(lblCvr);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("First name");
+		lblNewLabel_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_1.setBounds(180, 368, 112, 35);
+		createP.getContentPane().add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Last name");
+		lblNewLabel_1_2.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_2.setBounds(180, 409, 112, 35);
+		createP.getContentPane().add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Phone");
+		lblNewLabel_1_3.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_3.setBounds(180, 450, 112, 35);
+		createP.getContentPane().add(lblNewLabel_1_3);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("E-mail");
+		lblNewLabel_1_4.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_4.setBounds(180, 491, 112, 35);
+		createP.getContentPane().add(lblNewLabel_1_4);
+		
+		JLabel lblNewLabel_1_5 = new JLabel("Note");
+		lblNewLabel_1_5.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_5.setBounds(180, 532, 112, 35);
+		createP.getContentPane().add(lblNewLabel_1_5);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(331, 494, 179, 28);
+		createP.getContentPane().add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(331, 453, 179, 28);
+		createP.getContentPane().add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(331, 412, 179, 28);
+		createP.getContentPane().add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(331, 371, 179, 28);
+		createP.getContentPane().add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(331, 330, 179, 28);
+		createP.getContentPane().add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(331, 289, 179, 28);
+		createP.getContentPane().add(textField_6);
+		
+		JButton btnNewButton_1_4_1_1 = new JButton("CREATE");
+		btnNewButton_1_4_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1.setBounds(537, 581, 145, 42);
+		createP.getContentPane().add(btnNewButton_1_4_1_1);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				privateGui = new PrivateGui();
+				createP.dispose();
+			}
+		});
+		btnBack.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnBack.setBackground(new Color(135, 206, 250));
+		btnBack.setBounds(126, 258, 97, 25);
+		createP.getContentPane().add(btnBack);
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEnabled(false);
+		editorPane.setEditable(false);
+		editorPane.setBackground(new Color(153, 204, 255));
+		editorPane.setBounds(126, 258, 413, 367);
+		createP.getContentPane().add(editorPane);
+		
+		JButton btnNewButton = new JButton("HELP");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBackground(new Color(135, 206, 250));
+		btnNewButton.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnNewButton.setBounds(12, 13, 97, 25);
+		createP.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				home = new Home();
+				createP.dispose();
+			}
+		});
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(47, 203, 142, 42);
+		createP.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnClients = new JButton("CUSTOMERS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Customers.init();
+				createP.dispose();
+			}
+		});
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(188, 203, 157, 42);
+		createP.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sites = new Sites();
+				createP.dispose();
+			}
+		});
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(344, 203, 157, 42);
+		createP.getContentPane().add(btnNewButton_1_2);
+		
+		JButton btnEmployees = new JButton("EMPLOYEES");
+		btnEmployees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				employees = new Employees();
+				createP.dispose();
+			}
+		});
+		btnEmployees.setForeground(Color.WHITE);
+		btnEmployees.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnEmployees.setBackground(new Color(30, 144, 255));
+		btnEmployees.setBounds(501, 203, 145, 42);
+		createP.getContentPane().add(btnEmployees);
+	
+	}
+}
+
+

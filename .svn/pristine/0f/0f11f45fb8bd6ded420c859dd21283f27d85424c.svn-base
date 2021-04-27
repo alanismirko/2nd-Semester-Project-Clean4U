@@ -1,0 +1,160 @@
+package gui;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.event.ActionEvent;
+
+class CompanyGui extends JFrame{
+	
+	static JFrame frame;
+	static JPanel panel;
+	private static JTextField txtHelloMyPeople;
+	private static JTextField textField;
+	
+	public CompanyGui() {
+		init();
+	}
+
+	public static void init() {
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.WHITE);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+		frame.setTitle("Clean4U");
+		frame.setBounds(600,200, 700, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnClients = new JButton("CLIENTS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clients.init();
+			}
+		});
+		
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(236, 203, 187, 42);
+		frame.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home.init();
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(59, 203, 179, 42);
+		frame.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sites.init();
+			}
+		});
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(421, 203, 187, 42);
+		frame.getContentPane().add(btnNewButton_1_2);
+
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(CompanyGui.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		frame.getContentPane().add(logo);
+		
+		JButton btnNewButton_1_4 = new JButton("CREATE NEW  COMPANY");
+		btnNewButton_1_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateNewCompany.init();
+			}
+		});
+		btnNewButton_1_4.setForeground(Color.WHITE);
+		btnNewButton_1_4.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4.setBounds(223, 267, 230, 42);
+		frame.getContentPane().add(btnNewButton_1_4);
+		
+		JButton btnNewButton_1_4_1 = new JButton("LIST ALL");
+		btnNewButton_1_4_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1.setBounds(99, 322, 153, 42);
+		frame.getContentPane().add(btnNewButton_1_4_1);
+		
+		textField = new JTextField();
+		textField.setToolTipText("");
+		textField.setText("Search");
+		textField.setColumns(10);
+		textField.setBounds(186, 377, 237, 34);
+		frame.getContentPane().add(textField);
+		
+		JButton btnNewButton_1_5 = new JButton("FIND");
+		btnNewButton_1_5.setForeground(Color.WHITE);
+		btnNewButton_1_5.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_5.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_5.setBounds(421, 377, 82, 35);
+		frame.getContentPane().add(btnNewButton_1_5);
+		
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setBounds(186, 417, 318, 216);
+		frame.getContentPane().add(scrollPane);
+		
+		JButton btnNewButton_1_4_1_1 = new JButton("EDIT");
+		btnNewButton_1_4_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1.setBounds(264, 322, 145, 42);
+		frame.getContentPane().add(btnNewButton_1_4_1_1);
+		
+		JButton btnNewButton_1_4_1_1_1 = new JButton("DELETE");
+		btnNewButton_1_4_1_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1_1.setBounds(431, 322, 142, 42);
+		frame.getContentPane().add(btnNewButton_1_4_1_1_1);
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEnabled(false);
+		editorPane.setEditable(false);
+		editorPane.setBackground(new Color(153, 204, 255));
+		editorPane.setBounds(84, 267, 501, 374);
+		frame.getContentPane().add(editorPane);
+		
+		JButton btnNewButton = new JButton("HELP");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBackground(new Color(135, 206, 250));
+		btnNewButton.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnNewButton.setBounds(12, 13, 97, 25);
+		frame.getContentPane().add(btnNewButton);
+	
+	}
+}
+
+

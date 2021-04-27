@@ -1,0 +1,132 @@
+package gui;
+import java.awt.*;
+
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.event.ActionEvent;
+
+class Home extends JFrame{
+	
+	static JFrame home;	
+	static JPanel panel;	
+	
+	
+	
+	public Home() {
+		init();
+	}
+	
+	public static void init() {
+		home = new JFrame();
+		home.setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/images/icon.jpg")));
+		home.setResizable(false);
+		home.getContentPane().setBackground(Color.WHITE);
+		home.setVisible(true);
+		home.setLocationRelativeTo(null);
+		home.setTitle("Clean4U");
+		home.setBounds(600,200, 700, 700);
+		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		home.getContentPane().setLayout(null);
+		JButton btnClients = new JButton("CLIENTS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clients.init();
+				home.dispose();
+			}
+		});
+		
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(184, 203, 157, 42);
+		home.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(43, 203, 142, 42);
+		home.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sites.init();
+				home.dispose();
+				
+			}
+		});
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(340, 203, 157, 42);
+		home.getContentPane().add(btnNewButton_1_2);
+
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(Home.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		home.getContentPane().add(logo);
+		
+		JButton btnNewButton_1 = new JButton("HELP");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnNewButton_1.setBackground(new Color(135, 206, 250));
+		btnNewButton_1.setBounds(12, 13, 97, 25);
+		home.getContentPane().add(btnNewButton_1);
+		
+		JButton btnLogOut = new JButton("LOG OUT");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				home.dispose();
+			}
+		});
+		btnLogOut.setFont(new Font("Sitka Small", Font.PLAIN, 17));
+		btnLogOut.setBackground(new Color(135, 206, 250));
+		btnLogOut.setBounds(539, 13, 123, 25);
+		home.getContentPane().add(btnLogOut);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Home.class.getResource("/images/240_F_127389862_pMUoWAQMoKsq6QOrF8kq8S9KaXOCjlHP.jpg")));
+		lblNewLabel.setBounds(24, 330, 618, 212);
+		home.getContentPane().add(lblNewLabel);
+		
+		JButton btnEmployees = new JButton("EMPLOYEES");
+		btnEmployees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Employees.init();
+				home.dispose();
+			}
+		});
+		btnEmployees.setForeground(Color.WHITE);
+		btnEmployees.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnEmployees.setBackground(new Color(30, 144, 255));
+		btnEmployees.setBounds(497, 203, 145, 42);
+		home.getContentPane().add(btnEmployees);
+		
+	
+	}
+}
+
+

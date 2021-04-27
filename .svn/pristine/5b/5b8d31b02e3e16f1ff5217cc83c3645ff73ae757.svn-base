@@ -1,0 +1,36 @@
+package test;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import controllerLayer.DataAccessException;
+import databaselayer.DBConnection;
+
+class TestDatabaseConnection {
+
+	DBConnection con = null;
+	
+	@Before
+	public void setUp() throws Exception {
+		con = DBConnection.getInstance();
+	}
+	
+	@Test
+	@DisplayName ("Test Database connection")
+	public void isConnected() throws Exception {
+		assertNotNull("Connected - connection cannot be null", con);
+		
+		DBConnection.disconnect();
+		boolean wasNullified = DBConnection.instanceIsNull();
+		assertTrue("Disconnected - instance set to null", wasNullified);
+		
+		con = DBConnection.getInstance();
+		assertNotNull("Connected - connection cannot be null", con);
+	}
+}

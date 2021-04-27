@@ -1,0 +1,9 @@
+package databaselayer;
+
+public class ProductDB {
+	private final DBConnection dbcon;
+	
+	public ProductDB() {
+		dbcon = DBConnection.getInstance();
+	}
+}

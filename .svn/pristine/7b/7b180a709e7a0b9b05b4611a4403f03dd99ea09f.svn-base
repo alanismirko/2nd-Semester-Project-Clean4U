@@ -1,0 +1,12 @@
+package databaselayer;
+
+import java.util.ArrayList;
+import modelLayer.Site;
+
+public interface SitesDBIF {
+	Site deleteSite(Site s);
+	Site insertSite(Site s);
+	void updateSite();
+	ArrayList<Site> listAllSites();
+	Site findSiteByID(int siteID);
+}

@@ -1,0 +1,96 @@
+package controllerLayer;
+
+import java.util.Date;
+
+import dbLayer.PersonDBIF;
+import dbLayer.ShiftDBIF;
+import dbLayer.SiteDBIF;
+import modelLayer.Customer;
+import modelLayer.Employee;
+import modelLayer.Shift;
+import modelLayer.Site;
+
+public class PersonController {
+private PersonDBIF personDB;
+private ShiftDBIF shiftDB;
+	
+	public PersonController() throws DataAccessException {
+		personDB = new PersonDB();
+		shiftDB = new ShiftDB();
+	}
+	
+	/*Person management*/
+	//insert customer
+	public Customer insertCustomer (Customer customer)throws DataAccessException {
+		personDB.insertCustomer(customer);
+		return customer;
+	}
+	//insert employee
+	public Employee insertEmployee(Employee employee) throws DataAccessException {
+		personDB.insertEmployee(employee);
+		return employee;
+	}
+	
+	
+	//update customer
+	public void updateCustomer(int id, String firstName, String lastName, String phoneNumber, String email, String note, String cvr, String companyName) throws DataAccessException{
+		personDB.updateCustomer(id);
+	}
+	//update employee
+	public void updateEmployee(int id, String firstName, String lastName, String phoneNumber, String email, String note, int managedBy, double salary, String specialization) throws DataAccessException{
+		personDB.updateEmploee(id);
+	}
+	
+	
+	//find customer by ID
+	public Customer findCustomerID (int customerID) throws DataAccessException {
+		return personDB.findCustomerID(customerID);
+	}
+	
+	//find customer by lastName
+	public Customer findCustomerName (String lastName) throws DataAccessException {
+		return personDB.findCustomerName(lastName);
+	}
+	
+	//find employee by ID
+	public Customer findEmployeeID (int employeeID) throws DataAccessException {
+		return personDB.findEmployeeID(employeeID);
+	}
+	
+	//find employee by lastname
+	public Customer findEmployeeName (int employeeID) throws DataAccessException {
+		return personDB.findEmployeeName(employeeID);
+	}
+	
+	
+	//delete customer
+	public Customer deleteCustomer(Customer customer) throws DataAccessException {
+		personDB.deleteCustomer(customer);
+		return customer;
+	}
+	//delete employee
+	public Employee deleteEmployee(Employee employee) throws DataAccessException {
+		personDB.deleteEmployee(employee);
+		return employee;
+	}
+	
+	/*Shift management*/
+	//insert shift
+	public Shift insertShift (Shift shift)throws DataAccessException {
+		shiftDB.insert(shift);
+		return shift;
+	}
+	//update shift
+	public void updateShift(int shiftId, int serviceId, int employeeId, Date date, Date startHour, Date endHour) throws DataAccessException{
+		shiftDB.update(shiftId);
+	}
+	//find shift
+	public Shift findShift (int shiftId) throws DataAccessException {
+		return shiftDB.find(shiftId);
+	}
+	//delete shift
+	public Shift deleteShift(Shift shift) throws DataAccessException {
+		shiftDB.delete(shift);
+		return shift;
+	}
+}

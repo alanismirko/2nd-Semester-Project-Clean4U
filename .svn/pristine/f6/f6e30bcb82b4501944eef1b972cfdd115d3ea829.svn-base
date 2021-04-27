@@ -1,0 +1,31 @@
+package modelLayer;
+
+import java.util.Date;
+
+public class Shift {
+	private Date date;
+	private Date startHour;
+	private Date endHour;
+	
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public Date getStartHour() {
+		return startHour;
+	}
+	public void setStartHour(Date startHour) {
+		this.startHour = startHour;
+	}
+	public Date getEndHour() {
+		return endHour;
+	}
+	public void setEndHour(Date endHour) {
+		this.endHour = endHour;
+	}
+	
+	
+}

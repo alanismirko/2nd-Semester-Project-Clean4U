@@ -1,0 +1,222 @@
+package guiLayer;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import controllerLayer.DataAccessException;
+
+import java.awt.Color;
+import java.awt.Desktop;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.CardLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
+
+public class Home extends JFrame {
+
+	private JPanel contentPane;
+	private PanelCompany panelCompany;
+	private PanelHome panelHome;
+	private PanelEmployee panelEmployee;
+	private PanelSites panelSites;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Home frame = new Home();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @throws DataAccessException 
+	 */
+	public Home() throws DataAccessException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Home.class.getResource("/images/icon.jpg")));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1000, 700);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		panelCompany= new PanelCompany();
+		panelEmployee = new PanelEmployee();
+		panelHome = new PanelHome();
+		panelSites = new PanelSites();
+		
+		//Menu panel
+		JPanel menu = new JPanel();
+		menu.setBackground(new Color(153, 204, 255));
+		menu.setBounds(0, 0, 1000, 226);
+		contentPane.add(menu);
+		menu.setLayout(null);
+		
+		//Home panel showing
+		JPanel panel_home = new JPanel();
+		panel_home.addMouseListener(new PanelButtonMouseAdapter(panel_home) {
+			@Override
+			public void mouseClicked (MouseEvent e) {
+				menuClicked(panelHome);
+			}
+			
+		});
+		panel_home.setBackground(new Color(47, 79, 79));
+		panel_home.setBounds(86, 180, 267, 46);
+		menu.add(panel_home);
+		
+		//Menu home ( name-text)
+		JLabel lblNewLabel_1 = new JLabel("HOME");
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("Sitka Text", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(99, 13, 82, 20);
+		panel_home.add(lblNewLabel_1);
+		
+		//Panel companies showing
+		JPanel panel_companies = new JPanel();
+		panel_companies.addMouseListener(new PanelButtonMouseAdapter(panel_companies) {
+			@Override
+			public void mouseClicked (MouseEvent e) {
+				menuClicked(panelCompany);
+				
+			}
+		});
+		panel_companies.setBackground(new Color(47, 79, 79));
+		panel_companies.setBounds(352, 180, 267, 46);
+		menu.add(panel_companies);
+		
+		//Panel companies name (text)
+		JLabel lblNewLabel_1_1 = new JLabel("COMPANIES");
+		lblNewLabel_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1.setFont(new Font("Sitka Text", Font.PLAIN, 20));
+		lblNewLabel_1_1.setBounds(76, 13, 116, 20);
+		panel_companies.add(lblNewLabel_1_1);
+		
+		//Panel employee showing
+		JPanel panel_employees = new JPanel();
+		panel_employees.addMouseListener(new PanelButtonMouseAdapter(panel_employees) {
+			@Override
+			public void mouseClicked (MouseEvent e) {
+				menuClicked(panelEmployee);
+			}
+			
+		});
+		panel_employees.setBackground(new Color(47, 79, 79));
+		panel_employees.setBounds(619, 180, 267, 46);
+		menu.add(panel_employees);
+		
+		//Panel employee name (text)
+		JLabel lblNewLabel_1_2 = new JLabel("EMPLOYEES");
+		lblNewLabel_1_2.setForeground(Color.WHITE);
+		lblNewLabel_1_2.setBackground(new Color(0, 153, 255));
+		lblNewLabel_1_2.setFont(new Font("Sitka Text", Font.PLAIN, 20));
+		lblNewLabel_1_2.setBounds(72, 13, 127, 20);
+		panel_employees.add(lblNewLabel_1_2);
+		
+		//logo picture
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBackground(new Color(0, 153, 255));
+		lblNewLabel.setIcon(new ImageIcon(Home.class.getResource("/images/logoclean.png")));
+		lblNewLabel.setBounds(360, -11, 277, 191);
+		menu.add(lblNewLabel);
+		
+		//help button
+		JButton btnHelp = new JButton("HELP");
+		btnHelp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnHelp.setBackground(Color.WHITE);
+		btnHelp.setFont(new Font("Sitka Text", Font.PLAIN, 18));
+		btnHelp.setBounds(12, 13, 97, 25);
+		menu.add(btnHelp);
+		
+		//Editor panel
+		JPanel editorPanel = new JPanel();
+		editorPanel.setBackground(Color.WHITE);
+		editorPanel.setBounds(33, 239, 919, 401);
+		contentPane.add(editorPanel);
+		editorPanel.setLayout(new CardLayout(0, 0));
+		
+		editorPanel.add(panelCompany, "name_193699474124300");
+		panelCompany.setLayout(null);
+		editorPanel.add(panelHome, "name_193699502550300");
+		editorPanel.add(panelEmployee, "name_193699516040300");
+		panelEmployee.setLayout(null);
+		
+		menuClicked(panelHome);
+		panelHome.setLayout(null);
+	}
+	
+	public void menuClicked(JPanel panel) {
+		panelCompany.setVisible(false);
+		panelHome.setVisible(false);
+		panelEmployee.setVisible(false);
+		
+		panel.setVisible(true);
+	}
+	
+	private class PanelButtonMouseAdapter extends MouseAdapter{
+		JPanel panel;
+		public PanelButtonMouseAdapter(JPanel panel) {
+			this.panel = panel;
+		}
+		
+		@Override
+		public void mouseEntered (MouseEvent e) {
+			panel.setBackground(new Color(112, 128, 144));
+			
+		}
+		@Override
+		public void mouseExited (MouseEvent e) {
+			panel.setBackground(new Color(47, 79, 79));
+			
+		}
+		@Override
+		public void mousePressed (MouseEvent e) {
+			panel.setBackground(new Color(60, 179, 113));
+			
+		}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			panel.setBackground(new Color(112, 128, 144));
+			
+		}
+	}
+}

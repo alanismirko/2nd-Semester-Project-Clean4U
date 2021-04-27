@@ -1,0 +1,4 @@
+module clean4u {
+	requires java.desktop;
+	requires java.sql;
+}

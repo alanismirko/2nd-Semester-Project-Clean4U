@@ -1,0 +1,81 @@
+package controllerLayer;
+
+import java.util.List;
+import databaselayer.CustomerDB;
+import databaselayer.EmployeeDB;
+import modelLayer.Customer;
+import modelLayer.Employee;
+
+public class PersonController {
+private final CustomerDB cdb;
+private final EmployeeDB edb;
+	
+	public PersonController() throws DataAccessException {
+		cdb = new CustomerDB();
+		edb = new EmployeeDB();
+	}
+	
+	/*
+	 * Person management
+	 */
+	//This is working, so the error is in DB classes
+	//insert customer
+	public boolean insertCustomer (String taxNum, String companyName, String firstName, String lastName,
+			String phoneNum, String email, String note)throws DataAccessException {
+		Customer c = new Customer(taxNum, companyName, firstName, lastName, phoneNum, email, note);
+		return cdb.addCustomer(c) == 0;
+	}
+	//insert employee
+	public boolean insertEmployee(int id, String firstName, String lastName, String phoneNumber, String email, int managedBy, double salary, String specialization, String note) throws DataAccessException {
+		Employee employee = new Employee(id, firstName, lastName, phoneNumber, email, managedBy, salary, specialization, note);
+		return edb.addEmployee(employee) == 0;
+	}
+	
+	//update customer
+	public boolean updateCustomer(Customer customer) {
+		return (cdb.updateCustomer(customer) == 0) ? true : false; 
+	}
+	
+	//update employee
+	public boolean updateEmployee(Employee employee) { 
+		return (edb.updateEmployee(employee) == 0) ? true : false; 
+	}
+	
+	//find customer by ID
+	public Customer findCustomerById(int id) {
+        return cdb.getCustomer(id);
+    }
+	
+	//get all customers
+	public List<Customer> getAllCustomers() {
+        return cdb.getAllCustomers();
+    }
+	
+	//find employee by ID
+	public Employee findEmployeeById(int id) {
+        return edb.getEmployee(id);
+    }
+	
+	//get all employees
+	public List<Employee> getAllEmployees() {
+        return edb.getAllEmployees();
+    }
+	
+	
+	//delete customer
+	public boolean deleteCustomer(Customer customer) { 
+		return (cdb.deleteCustomer(customer) == 0) ? true : false; 
+	}
+	
+	//delete employee
+	public boolean deleteEmployee(Employee employee) { 
+		return (edb.deleteEmployee(employee) == 0) ? true : false; 
+		}
+	
+	/*
+	 * Shift management
+	 */
+	
+	
+
+}

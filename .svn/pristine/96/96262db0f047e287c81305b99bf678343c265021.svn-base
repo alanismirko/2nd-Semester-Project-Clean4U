@@ -1,0 +1,31 @@
+package modelLayer;
+
+public class ZipCode {
+	private String zipCode;
+	private String City;
+	
+	
+	public ZipCode(String zipCode, String city) {
+		super();
+		this.zipCode = zipCode;
+		City = city;
+	}
+
+
+	public String getZipcode() {
+		return zipCode;
+	}
+
+	public void setZipcode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getCity() {
+		return City;
+	}
+
+	public void setCity(String city) {
+		City = city;
+	}	
+	
+}

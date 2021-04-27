@@ -1,0 +1,129 @@
+package controllerLayer;
+
+import databaselayer.SiteDB;
+import dbLayer.AddressDBIF;
+import dbLayer.ServiceDBIF;
+import dbLayer.SiteDBIF;
+import dbLayer.WarehouseDBIF;
+import dbLayer.ZipCodeDBIF;
+import modelLayer.Address;
+import modelLayer.Service;
+import modelLayer.Site;
+import modelLayer.Warehouse;
+import modelLayer.ZipCode;
+
+public class SiteController {
+	private SiteDB siteDB;
+	private ServiceDB serviceDB;
+	private AddressDB addressDB;
+	private ZipCodeDB zipCodeDB;
+	private WarehouseDB warehouseDB;
+	
+	public SiteController() {
+		siteDB = new SiteDB();
+		serviceDB = new ServiceDB();
+		addressDB = new AddressDB();
+		zipCodeDB = new zipCodeDB();
+		warehouseDB = new WarehouseDB();
+	}
+	/*Site management*/
+	//insert site
+	public Site insertSite (Site site)throws DataAccessException {
+		siteDB.insert(site);
+		return site;
+	}
+	//update site
+	public void updateSite(int siteId, int customerId, int addressId, String typeOfSite, double sizeOfArea, String workingHours, boolean status) throws DataAccessException{
+		siteDB.update(siteId);
+	}
+	//find site
+	public Site findSite (int siteId) throws DataAccessException {
+		return siteDB.find(siteId);
+	}
+	//delete site
+	public Site deleteSite(Site site) throws DataAccessException {
+		siteDB.delete(site);
+		return site;
+	}
+	
+	/*Service management*/
+	//insert service
+	public Service insertService (Service service)throws DataAccessException {
+		serviceDB.insert(service);
+		return service;
+	}
+	//update service
+	public void updateService(int serviceId, int siteId, String type, String specifics) throws DataAccessException{
+		serviceDB.update(serviceId);
+	}
+	//find service
+	public Service findService (int siteId) throws DataAccessException {
+		return serviceDB.find(siteId);
+	}
+	//delete service
+	public Service deleteService(Service service) throws DataAccessException {
+		serviceDB.delete(service);
+		return service;
+	}
+	
+	/*manage address*/
+	//insert address
+	public Address insertService (Address address)throws DataAccessException {
+		addressDB.insert(address);
+		return address;
+	}
+	//update address
+	public void updateAddress(String zipCode, String city) throws DataAccessException{
+		addressDB.update(zipCode);
+	}
+	//find address
+	public Address findAddress (int addressId) throws DataAccessException {
+		return addressDB.find(addressId);
+	}
+	//delete address
+	public Address deleteAddress(Address address) throws DataAccessException {
+		addressDB.delete(address);
+		return address;
+	}
+	
+	/*manage zipCode*/
+	//insert zipCode
+	public ZipCode insertZipCode (ZipCode zipCode)throws DataAccessException {
+		zipCodeDB.insert(zipCode);
+		return zipCode;
+	}
+	//update zipCode
+	public void updateZipCode(String zipCode, String city) throws DataAccessException{
+		zipCodeDB.update(zipCode);
+	}
+	//find address
+	public ZipCode findZipCode (String zipCode) throws DataAccessException {
+		return zipCodeDB.find(zipCode);
+	}
+	//delete address
+	public ZipCode deleteZipCode(ZipCode zipCode) throws DataAccessException {
+		zipCodeDB.delete(zipCode);
+		return zipCode;
+	}
+	
+	
+	/*manage warehouse*/
+	//insert warehouse
+	public Warehouse insertWarehouse (Warehouse warehouse)throws DataAccessException {
+		warehouseDB.insert(warehouse);
+		return warehouse;
+	}
+	//update warehouse
+	public void updateWarehouse(int warehouseId, int addressId, String name) throws DataAccessException{
+		warehouseDB.update(warehouseId);
+	}
+	//find warehouse
+	public Warehouse findWarehouse (int warehouseId) throws DataAccessException {
+		return warehouseDB.find(warehouseId);
+	}
+	//delete warehouse
+	public Warehouse deleteWarehouse(Warehouse warehouse) throws DataAccessException {
+		warehouseDB.delete(warehouse);
+		return warehouse;
+	}
+}

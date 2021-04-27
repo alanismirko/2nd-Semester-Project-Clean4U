@@ -1,0 +1,51 @@
+package modelLayer;
+
+import java.util.Date;
+
+public class RequestedProducts {
+	private int orderID;
+	private Date date;
+	private double totalCost;
+	private int serviceId;
+	private int warehouseId;
+	
+	public RequestedProducts(int serviceId, int warehouseId, int orderID, Date date, double totalCost) {
+		this.orderID = orderID;
+		this.date = date;
+		this.totalCost = totalCost;
+		this.setServiceId(serviceId);
+		this.setWarehouseId(warehouseId);
+	}
+	public int getOrderID() {
+		return orderID;
+	}
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public double getTotalCost() {
+		return totalCost;
+	}
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+	public int getWarehouseId() {
+		return warehouseId;
+	}
+	public void setWarehouseId(int warehouseId) {
+		this.warehouseId = warehouseId;
+	}
+	public int getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(int serviceId) {
+		this.serviceId = serviceId;
+	}
+	
+	
+}

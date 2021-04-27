@@ -1,0 +1,132 @@
+package databaseLayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelLayer.Address;
+import modelLayer.Customer;
+import modelLayer.Site;
+import modelLayer.ZipCode;
+
+public class AddressDB {
+	private final DBConnection dbcon;
+	
+	public AddressDB() {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<Address> getAllAddresses() {
+		List<Address> addresses = new ArrayList<>();
+		String query = "SELECT * FROM Addresses";
+		
+		
+		try {
+			ZipCodeDB zipCodeDB = new ZipCodeDB();
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while (res.next()) {
+				
+				ZipCode zipcode = zipCodeDB.getSpecificZipCode(res.getString("zipCode"));
+				
+				addresses.add(new Address(
+					res.getInt("addressId"),
+					res.getString("country"),
+					zipcode,
+					res.getString("street"),
+					res.getString("streetNumber")
+			));
+			
+				System.out.println("Address received");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return addresses;
+		
+	}
+	
+	public Address getSpecificAddress(int id) {
+		
+		String query = "SELECT * FROM Addresses WHERE addressId=" + id;
+		
+		try {
+			ZipCodeDB zipCodeDB = new ZipCodeDB();
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while(res.next()) {
+				
+				ZipCode zipcode = zipCodeDB.getSpecificZipCode(res.getString("zipCode"));
+				
+				Address address = new Address(
+						res.getInt("addressId"),
+						res.getString("country"),
+						zipcode,
+						res.getString("street"),
+						res.getString("streetNumber")
+				);
+				return address;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	public int addAddress(Address address) {
+		int res = 1;
+		
+		String query = "INSERT INTO Addresses (country,zipCode,street,streetNumber)";
+		query += " VALUES ("
+				+ address.getCountry() + ","
+				+ address.getZipCode().getZipCode() + ","
+				+ address.getStreet() + ","
+				+ address.getStreetNumber();
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int deleteAddress(Address address) {
+		int res = 1;
+		
+		String query = "DELETE FROM Addresses WHERE addressId=";
+		query += address.getAddressId() + ";";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public int updateAddress(Address address) {
+		int res = 1;
+		
+		String query = "UPDATE Addresses (addressId,country,zipCode,street,streetNumber)";
+		query+= " SET ";
+		query += "addressId = " + address.getAddressId() + ",";
+		query += "country" + address.getCountry() + ",";
+		query += "zipCode" + address.getZipCode().getZipCode() + ",";
+		query += "street" + address.getStreet() + ",";
+		query += "streetNumber" + address.getStreetNumber() + ",";
+		query += ");";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	
+}

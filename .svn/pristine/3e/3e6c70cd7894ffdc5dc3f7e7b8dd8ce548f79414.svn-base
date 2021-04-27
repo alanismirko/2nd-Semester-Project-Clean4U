@@ -1,0 +1,85 @@
+package controllerLayer;
+
+import java.util.Date;
+
+import dbLayer.OrderLineDBIF;
+import dbLayer.ProductDBIF;
+import dbLayer.RequestedProductsDBIF;
+import dbLayer.SiteDBIF;
+import modelLayer.OrderLine;
+import modelLayer.ProductDescription;
+import modelLayer.RequestedProducts;
+import modelLayer.Warehouse;
+
+public class ProductController {
+	private ProductDBIF productDB;
+	private OrderLineDBIF orderLineDB;
+	private RequestedProductsDBIF requestedProductsDB;
+	
+	public ProductController() {
+		productDB = PruductDB();
+		orderLineDB = orderLine();
+		requestedProductsDB = RequestedProductsDB ();
+	}
+	
+	/*product description management*/
+	//insert product description
+	public ProductDescription insertproduct (ProductDescription product)throws DataAccessException {
+		productDB.insert(product);
+		return product;
+	}
+	//update product description
+	public void updateProduct(String barcode, String name, String category, double price) throws DataAccessException{
+		productDB.update(barcode);
+	}
+	//find product description
+	public ProductDescription findProduct (String barcode) throws DataAccessException {
+		return productDB.find(barcode);
+	}
+	//delete product description
+	public ProductDescription deleteProduct(ProductDescription product) throws DataAccessException {
+		productDB.delete(product);
+		return product;
+	}
+	
+	
+	/*orderLine management*/
+	//insert orderLine
+	public OrderLine insertOrderLine (OrderLine orderLine)throws DataAccessException {
+		orderLineDB.insert(orderLine);
+		return orderLine;
+	}
+	//update orderLine
+	public void updateOrderLine(int id, int orderId, int productId,int quantity) throws DataAccessException{
+		orderLineDB.update(id);
+	}
+	//find orderLine
+	public OrderLine findOrderLine (int id) throws DataAccessException {
+		return orderLineDB.find(id);
+	}
+	//delete orderLine
+	public OrderLine deleteOrderLine(OrderLine orderLine) throws DataAccessException {
+		orderLineDB.delete(orderLine);
+		return orderLine;
+	}
+	
+	/*RequestedProducts management*/
+	//insert RequestedProduct
+	public RequestedProducts insertRequstedProduct (RequestedProducts requestedProducts)throws DataAccessException {
+		requestedProductsDB.insert(requestedProducts);
+		return requestedProducts;
+	}
+	//update RequestedProducts
+	public void updateRequestedProduct(int serviceId, int warehouseId, int orderID, Date date, double totalCost) throws DataAccessException{
+		requestedProductsDB.update(orderID);
+	}
+	//find requestedProductsDB
+	public RequestedProducts findRequestedProducts (int orderID) throws DataAccessException {
+		return requestedProductsDB.find(orderID);
+	}
+	//delete RequestedProducts
+	public RequestedProducts deleteRequestedProducts(RequestedProducts requestedProducts) throws DataAccessException {
+		requestedProductsDB.delete(requestedProducts);
+		return requestedProducts;
+	}
+}

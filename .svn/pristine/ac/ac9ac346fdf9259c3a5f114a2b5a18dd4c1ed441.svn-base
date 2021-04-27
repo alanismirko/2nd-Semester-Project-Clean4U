@@ -1,0 +1,145 @@
+package databaselayer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelLayer.Address;
+import modelLayer.Customer;
+import modelLayer.Site;
+
+
+public class SiteDB {
+	private final DBConnection dbcon;
+	
+	public SiteDB() {
+		dbcon = DBConnection.getInstance();
+	}
+	
+	public List<Site> getAllCustomerSites(int customerId) {
+		List<Site> sites = new ArrayList<>();
+		String query = "SELECT * FROM Sites WHERE customerId=" + customerId;
+		
+		
+		try {
+			CustomerDB customerDB = new CustomerDB();
+			AddressDB addressDB = new AddressDB();
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while (res.next()) {
+				
+				Customer customer = customerDB.getCustomer(res.getInt("customerId"));
+				Address address = addressDB.getSpecificAddress(res.getInt("addressId"));
+				
+				sites.add(new Site(
+					res.getInt("siteId"),
+					customer,
+					address,
+					res.getString("type"),
+					res.getDouble("sizeOfArea"),
+					res.getString("openHour"),
+					res.getString("closeHour")
+			));
+			
+				System.out.println("Site received");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sites;
+		
+	}
+	
+	public Site getSpecificSite(int id) {
+		
+		String query = "SELECT * FROM Sites WHERE siteId=" + id;
+		
+		try {
+			CustomerDB customerDB = new CustomerDB();
+			AddressDB addressDB = new AddressDB();
+			ResultSet res = dbcon.executeQuery(query);
+			
+			while(res.next()) {
+				
+				Customer customer = customerDB.getCustomer(res.getInt("customerId"));
+				Address address = addressDB.getSpecificAddress(res.getInt("addressId"));
+				
+				Site site = new Site(
+					res.getInt("siteId"),
+					customer,
+					address,
+					res.getString("type"),
+					res.getDouble("sizeOfArea"),
+					res.getString("openHour"),
+					res.getString("closeHour")
+				);
+				return site;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public int addSite(Site site) {
+		int res = 1;
+
+		String query = "INSERT INTO Sites (siteId,customerId,addressId,type,sizeOfArea,openHour,closeHour,status)";
+		query += " VALUES (" + site.getSiteId() + ","
+				+ site.getCustomer().getId() + ","
+				+ site.getAddress().getAddressId() + ","
+				+ site.getTypeOfSite() + ","
+				+ site.getSizeOfArea() + ","
+				+ site.getOpenHour() + ","
+				+ site.getCloseHour() + ","
+				+ site.getStatus();
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	public int deleteSite(Site site) {
+		int res = 1;
+		
+		String query = "DELETE FROM Sites WHERE siteId=";
+		query += site.getSiteId() + ";";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	public int updateSite(Site site) {
+		int res = 1;
+		
+		String query = "UPDATE Sites (siteId,customerId,addressId,type,sizeOfArea,openHour,closeHour,status)";
+		query+= " SET ";
+		query += "siteId = " + site.getSiteId() + ",";
+		query += "customerid" + site.getCustomer().getId() + ",";
+		query += "addressId" + site.getAddress().getAddressId() + ",";
+		query += "type" + site.getTypeOfSite() + ",";
+		query += "sizeOfArea" + site.getSizeOfArea() + ",";
+		query += "openHour" + site.getOpenHour() + ",";
+		query += "closeHour" + site.getCloseHour() + ",";
+		query += "status" + site.getStatus() + ",";
+		query += ");";
+		
+		try {
+			res = dbcon.executeInsertWithIdentity(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+}
+
+

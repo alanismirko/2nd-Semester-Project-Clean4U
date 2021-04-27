@@ -1,0 +1,80 @@
+package databaselayer;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import modelLayer.Site;
+
+public class SitesDB implements SitesDBIF{
+	private static final String listAllSitesQ = 
+			"select siteId, clientId, addressId, typeOfSite, sizeOfArea, workingHours, status FROM Site";
+	
+	private static final String findSiteByIDQ = 
+			listAllSitesQ + " where siteId = ?";
+	
+	private static final String updateQ = 
+			"update Site set clientId=?, addressId=?, typeOfSite=?, sizeOfArea=?, workingHours=?, status=? WHERE siteId = ?";
+	
+	private static final String insertQ = 
+			"insert into Site (siteId, clientId, addressId, typeOfSite, sizeOfArea, workingHours, status) VALUES (?,?,?,?,?,?,?)";
+	
+	private static final String deleteQ = 
+			"DELETE FROM Site WHERE siteId = ?";
+	
+	private PreparedStatement listAllSites, findSiteByID, update, insert, delete;
+	
+	public SitesDB() {
+		try {
+			listAllSites = DBConnection.getInstance().getDBcon()
+					.prepareStatement(listAllSitesQ);
+		
+		findSiteByID = DBConnection.getInstance().getDBcon()
+				.prepareStatement(findSiteByIDQ);
+		
+		update = DBConnection.getInstance().getDBcon()
+				.prepareStatement(updateQ);
+		
+		insert = DBConnection.getInstance().getDBcon()
+				.prepareStatement(insertQ);
+		
+		delete = DBConnection.getInstance().getDBcon()
+				.prepareStatement(deleteQ);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	}
+
+	@Override
+	public Site deleteSite(Site s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Site insertSite(Site s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateSite() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<Site> listAllSites() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Site findSiteByID(int siteID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

@@ -1,0 +1,31 @@
+package modelLayer;
+
+import java.util.Date;
+
+public class RequiredProducts {
+	private int orderID;
+	private Date date;
+	private double totalCost;
+	
+	
+	public int getOrderID() {
+		return orderID;
+	}
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public double getTotalCost() {
+		return totalCost;
+	}
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+	
+	
+}

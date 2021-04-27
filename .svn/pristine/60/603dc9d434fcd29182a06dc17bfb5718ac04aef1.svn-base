@@ -1,0 +1,162 @@
+package gui;
+import java.awt.*;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+class CreatePrivateClient extends JFrame{
+	
+	static JFrame frame;
+	static JPanel panel;
+	private static JTextField txtHelloMyPeople;
+	private static JTextField textField;
+	private static JTextField textField_1;
+	private static JTextField textField_2;
+	private static JTextField textField_3;
+	private static JTextField textField_4;
+	private static JTextField textField_5;
+	private static JTextField textField_6;
+	
+	public CreatePrivateClient() {
+		init();
+	}
+
+	public static void init() {
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.WHITE);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+		frame.setTitle("Clean4U");
+		frame.setBounds(600,200, 700, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnClients = new JButton("CLIENTS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clients.init();
+			}
+		});
+		
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(236, 203, 187, 42);
+		frame.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(59, 203, 179, 42);
+		frame.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sites.init();
+			}
+		});
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(421, 203, 187, 42);
+		frame.getContentPane().add(btnNewButton_1_2);
+
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(CreatePrivateClient.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		frame.getContentPane().add(logo);
+		
+		JLabel lblNewLabel = new JLabel("Client ID");
+		lblNewLabel.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel.setBounds(180, 286, 112, 35);
+		frame.getContentPane().add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(331, 532, 179, 73);
+		frame.getContentPane().add(textField);
+		
+		JLabel lblCvr = new JLabel("CVR");
+		lblCvr.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblCvr.setBounds(180, 327, 112, 35);
+		frame.getContentPane().add(lblCvr);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("First name");
+		lblNewLabel_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_1.setBounds(180, 368, 112, 35);
+		frame.getContentPane().add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Last name");
+		lblNewLabel_1_2.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_2.setBounds(180, 409, 112, 35);
+		frame.getContentPane().add(lblNewLabel_1_2);
+		
+		JLabel lblNewLabel_1_3 = new JLabel("Phone");
+		lblNewLabel_1_3.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_3.setBounds(180, 450, 112, 35);
+		frame.getContentPane().add(lblNewLabel_1_3);
+		
+		JLabel lblNewLabel_1_4 = new JLabel("E-mail");
+		lblNewLabel_1_4.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_4.setBounds(180, 491, 112, 35);
+		frame.getContentPane().add(lblNewLabel_1_4);
+		
+		JLabel lblNewLabel_1_5 = new JLabel("Note");
+		lblNewLabel_1_5.setFont(new Font("Sitka Small", Font.PLAIN, 16));
+		lblNewLabel_1_5.setBounds(180, 532, 112, 35);
+		frame.getContentPane().add(lblNewLabel_1_5);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(331, 494, 179, 28);
+		frame.getContentPane().add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(331, 453, 179, 28);
+		frame.getContentPane().add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(331, 412, 179, 28);
+		frame.getContentPane().add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(331, 371, 179, 28);
+		frame.getContentPane().add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(331, 330, 179, 28);
+		frame.getContentPane().add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(331, 289, 179, 28);
+		frame.getContentPane().add(textField_6);
+		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEnabled(false);
+		editorPane.setEditable(false);
+		editorPane.setBackground(new Color(153, 204, 255));
+		editorPane.setBounds(126, 258, 413, 367);
+		frame.getContentPane().add(editorPane);
+		
+		JButton btnNewButton_1_4_1_1 = new JButton("CREATE");
+		btnNewButton_1_4_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_4_1_1.setFont(new Font("Sitka Small", Font.PLAIN, 14));
+		btnNewButton_1_4_1_1.setBackground(new Color(51, 51, 255));
+		btnNewButton_1_4_1_1.setBounds(537, 581, 145, 42);
+		frame.getContentPane().add(btnNewButton_1_4_1_1);
+		
+	
+	}
+}
+
+

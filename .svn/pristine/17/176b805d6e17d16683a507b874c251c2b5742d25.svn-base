@@ -1,0 +1,71 @@
+package controllerLayer;
+
+import java.util.List;
+
+import databaselayer.AddressDB;
+import databaselayer.ZipCodeDB;
+import modelLayer.Address;
+import modelLayer.ZipCode;
+
+public class AddressController {
+	
+	private AddressDB adb;
+	private ZipCodeDB zcdb;
+	
+	public AddressController() throws DataAccessException {
+		adb = new AddressDB();
+		zcdb = new ZipCodeDB();
+	}
+	// |ADDRESSDB| WILL BE USED FOR BOTH ADDRESS AND ZIPCODE TABLES
+	
+	//ADDRESS
+	
+	//insert address
+	public boolean insertAddress(String country, ZipCode zipCode, String street, String streetNumber) {
+		Address address = new Address(country, zipCode, street, streetNumber);
+		return adb.addAddress(address) == 0;
+	}
+	
+	//update address
+	public boolean updateAddress(Address address) throws DataAccessException{
+		return (adb.updateAddress(address) == 0) ? true : false;
+	}
+	//find address by Id
+	public Address findAddressById (int addressId) throws DataAccessException {
+		return adb.getSpecificAddress(addressId);
+	}
+	//get all addresses
+	public List<Address> getAllAddresses() {
+		return adb.getAllAddresses();
+	}
+	//delete address
+	public boolean deleteAddress(Address address) throws DataAccessException {
+		return (adb.deleteAddress(address) == 0) ? true : false;
+	}
+	
+	//ZIPCODE
+	
+	//insert zipCode
+	public boolean insertZipCode(String zipCode, String city) {
+		ZipCode zCode = new ZipCode(zipCode, city);
+		return zcdb.addZipCode(zCode) == 0;
+	}
+	//update zipCode
+	public boolean updateZipCode(ZipCode zipCode) throws DataAccessException{
+		return (zcdb.updateZipCode(zipCode) == 0) ? true : false;
+	}
+	//find zipCode by Id
+	public ZipCode findZipCodeById (String zipCode) throws DataAccessException {
+		return zcdb.getSpecificZipCode(zipCode);
+	}
+	//get all zipCodes
+	public List<ZipCode> getAllZipCodes() {
+		return zcdb.getAllZipCodes();
+	}
+	//delete zipCode
+	public boolean deleteZipCode(ZipCode zipCode) throws DataAccessException {
+		return (zcdb.deleteZipCode(zipCode) == 0) ? true : false;
+	}
+}
+	
+

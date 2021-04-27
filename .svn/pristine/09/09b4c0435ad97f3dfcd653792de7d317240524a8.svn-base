@@ -1,0 +1,108 @@
+package gui;
+import java.awt.*;
+
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.event.ActionEvent;
+
+class Home extends JFrame{
+	
+	static JFrame home;	
+	static JPanel panel;	
+	private static JTextField txtHelloMyPeople;
+	Clients clients;
+	Sites sites;
+	
+	
+	public Home() {
+		init();
+	}
+	
+	public static void init() {
+		home = new JFrame();
+		home.setResizable(false);
+		home.getContentPane().setBackground(Color.WHITE);
+		home.setVisible(true);
+		home.setLocationRelativeTo(null);
+		home.setTitle("Clean4U");
+		home.setBounds(600,200, 700, 700);
+		home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		home.getContentPane().setLayout(null);
+		JButton btnClients = new JButton("CLIENTS");
+		btnClients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clients.init();
+				home.dispose();
+			}
+		});
+		
+		btnClients.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnClients.setForeground(Color.WHITE);
+		btnClients.setBackground(new Color(30, 144, 255));
+		btnClients.setBounds(236, 203, 187, 42);
+		home.getContentPane().add(btnClients);
+		
+		JButton btnNewButton_1_1 = new JButton("HOME");
+		btnNewButton_1_1.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_1.setForeground(Color.WHITE);
+		btnNewButton_1_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_1.setBounds(59, 203, 179, 42);
+		home.getContentPane().add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_2 = new JButton("SITES");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sites.init();
+				home.dispose();
+				
+			}
+		});
+		btnNewButton_1_2.setFont(new Font("Source Serif Pro Semibold", Font.PLAIN, 16));
+		btnNewButton_1_2.setForeground(Color.WHITE);
+		btnNewButton_1_2.setBackground(new Color(30, 144, 255));
+		btnNewButton_1_2.setBounds(421, 203, 187, 42);
+		home.getContentPane().add(btnNewButton_1_2);
+
+		JLabel logo = new JLabel("");
+		logo.setBackground(new Color(176, 224, 230));
+		logo.setIcon(new ImageIcon(Home.class.getResource("/images/logoclean.png")));
+		logo.setBounds(209, 13, 256, 184);
+		home.getContentPane().add(logo);
+		
+		txtHelloMyPeople = new JTextField();
+		txtHelloMyPeople.setBackground(Color.WHITE);
+		txtHelloMyPeople.setEditable(false);
+		txtHelloMyPeople.setText("HELLO MY PEOPLE");
+		txtHelloMyPeople.setBounds(236, 377, 159, 22);
+		home.getContentPane().add(txtHelloMyPeople);
+		txtHelloMyPeople.setColumns(10);
+		
+		JButton btnNewButton = new JButton("HELP");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI(
+							"https://drive.google.com/file/d/17UZ8nDYNbhXBmnrEH1inwu5S34N3-4DH/view?usp=sharing"));
+				} catch (IOException | URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+	
+	
+	}
+}
+
+

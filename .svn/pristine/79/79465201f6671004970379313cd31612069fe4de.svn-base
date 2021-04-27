@@ -1,0 +1,23 @@
+package modelLayer;
+
+public class Customer extends Person{
+	private String cvr;
+	private String companyName;
+	
+	
+	public String getCvr() {
+		return cvr;
+	}
+	public void setCvr(String cvr) {
+		this.cvr = cvr;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	
+	
+
+}

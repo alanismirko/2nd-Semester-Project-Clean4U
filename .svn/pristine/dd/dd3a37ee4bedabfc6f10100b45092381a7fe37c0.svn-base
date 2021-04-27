@@ -1,0 +1,20 @@
+package modelLayer;
+
+public class Service {
+	private String type;
+	private String note;
+	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getSpecifics() {
+		return note;
+	}
+	public void setSpecifics(String specifics) {
+		this.note = specifics;
+	}
+}
